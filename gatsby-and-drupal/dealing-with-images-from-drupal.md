@@ -197,6 +197,7 @@ Maybe the best part of all of this is the fact that all the business logic is en
 
 ## Further your understanding
 
+- Can you also update the `RecipeCard` component to display an image thumbnail?
 - [Check out the other image manipulation functions provided by the gatsby-plugin-sharp plugin](https://www.gatsbyjs.org/packages/gatsby-plugin-sharp/).
 - In this tutorial we've dealt only with fluid width images. [Learn about using the `Img` component to handle fixed width/height response images](https://www.gatsbyjs.org/packages/gatsby-image/)
 

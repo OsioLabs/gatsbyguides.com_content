@@ -47,7 +47,7 @@ And then enable it via the Drupal UI.
 
 Once it's enabled in the *Manage* administration menu navigate to *Structure* > *Content types* > *Recipe* > *Manage fields* then edit both the *Ingredients* and *Recipe instructions* fields.
 
-For each, in the new *Field visibility and permissions* section added by the field permissions module select *Custom permissions* and then give the *Authenticated User* role the "View anyone's value for field field_ingredients" permission. And give *Author* and *Editor* permission to create and edit values for the field. Then click *Save settings*.
+For each field, in the new *Field visibility and permissions* section added by the field permissions module select *Custom permissions* and then give the *Authenticated User* role the "View anyone's value for field field_ingredients" permission. And give *Author* and *Editor* permission to create and edit values for the field. Then click *Save settings*.
 
 ![Screenshot of form showing field permissions configured for the recipe instructions field](/content/gatsby-and-drupal/images/field_permissions-example.png)
 
@@ -63,7 +63,7 @@ Example:
 
 ![Screenshot of the recipe teaser component showing a call to action element with a login button.](/content/gatsby-and-drupal/images/recipe-teaser-example.png)
 
-Create the file *src/components/Recipe/RecipeTeaser.js*:
+Create the file *src/components/RecipeTeaser/RecipeTeaser.js*:
 
 ```javascript
 import React from 'react';
@@ -170,7 +170,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import RecipeList from '../RecipeList/RecipeList';
 
-import withDrupalOauthConsumer from '../Session/withDrupalOauthConsumer';
+import withDrupalOauthConsumer from '../drupal-oauth/withDrupalOauthConsumer';
 
 const styles = theme => ({
   progressBar: {
@@ -312,7 +312,7 @@ import RecipeTeaser from '../components/Recipe/RecipeTeaser';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
-import DrupalOauthContext from '../components/Session/DrupalOauthContext';
+import DrupalOauthContext from '../components/drupal-oauth/DrupalOauthContext';
 
 const styles = theme => ({
   root: {

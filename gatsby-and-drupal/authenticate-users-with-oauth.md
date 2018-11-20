@@ -42,7 +42,7 @@ There are many ways to ask Drupal to generate a token, in accordance with the OA
 
 ## Handling OAuth with React
 
-Our focus with this tutorial is on integrating OAuth into a Gatsby application, not on the specifics of handling the OAuth handshake. So we'll make use of some existing code which you can read through and explore on your own if you're curious. You can grab the code here. @@@ LINK NEEDED @@@.
+Our focus with this tutorial is on integrating OAuth into a Gatsby application, not on the specifics of handling the OAuth handshake. So we'll make use of some existing code which you can read through and explore on your own if you're curious. You can grab the code from [the example repository](https://github.com/LullabotEducation/gatsby-drupal-examples/tree/authenticate-users-with-oauth/src/components/drupal-oauth).
 
 Here's what's in it:
 
@@ -51,24 +51,24 @@ Here's what's in it:
 - *withDrupalOauthConsumer.js*: Provides the `widthDrupalOauthConsumer` higher-order component for use when another component needs to gain access to DrupalOauthContext data. Adds userAuthenticated, drupalOauthClient, and updateAuthenticatedUserState props to wrapped components.
 - *withDrupalOauthProvider.js*: Provides the `withDrupalOauthProvider` higher-order compoment. Assists in initializing a DrupalOauthContext provider.
 
-Place all of these files in the *src/components/Session/* directory in your application.
+Place all of these files in the *src/components/drupal-oauth/* directory in your application.
 
 ## Initialize an OAuth context provider
 
 We'll use the React context API to keep track of the current user's authentication state. Which will allow us to wrap any component in our application using `withDrupalOAuthConsumer`, and quickly check via the `props.userAuthenticated` parameter wether the current user is authenticated or not. And then vary what the component renders as necessary.
 
-In order to do this we need to initialize the context provider. In src/components/layout.js we need to add the following code:
+In order to do this we need to initialize the context provider. In *src/components/layout.js* we need to add the following code:
 
 ```javascript
-import drupalOauth from '../components/Session/drupalOauth';
-import withDrupalOauthProvider from '../components/Session/withDrupalOauthProvider';
+import drupalOauth from '../components/drupal-oauth/drupalOauth';
+import withDrupalOauthProvider from '../components/drupal-oauth/withDrupalOauthProvider';
 
 // Initialize a new drupalOauth client which we can use to seed the context
 // provider.
 const drupalOauthClient = new drupalOauth({
-  token_url: 'http://gatsby-drupal.ddev.local/oauth/token',
-  client_id: '4b9310bf-6716-4250-a0e9-af2ca383b0a6',
-  client_secret: 'drupal',
+  drupal_root: 'http://gatsby-drupal.ddev.local',
+  client_id: '448d13ae-c82c-4401-863d-a2d95554ecaa',
+  client_secret: 'gatsby',
 });
 
 // ... component definition goes here ...
@@ -106,7 +106,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import withDrupalOauthConsumer from '../Session/withDrupalOauthConsumer';
 
-class SignInForm extends React.Component {
+class SignIn extends React.Component {
   state = {
     open: false,
     processing: false,
@@ -191,7 +191,7 @@ class SignInForm extends React.Component {
   }
 }
 
-export default withDrupalOauthConsumer(SignInForm);
+export default withDrupalOauthConsumer(SignIn);
 ```
 
 This code follows a [fairly standard pattern](https://reactjs.org/docs/forms.html) for defining a form component, and uses components from the Material UI library for styling. The most interesting parts here are:
@@ -260,7 +260,6 @@ Finally, update the `Navigation` component so that it checks to see if the user 
 ```javascript
 {props.userAuthenticated ?
   <>
-    <Button variant="outlined" component={Link} to="/user/profile">My Account</Button>
     <LogoutLink/>
   </>
   :

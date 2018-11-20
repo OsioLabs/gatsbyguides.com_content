@@ -68,7 +68,7 @@ In order to protect routes we define, and use, a new `PrivateRoute` component in
 import React from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
-import withDrupalOauthConsumer from '../Session/withDrupalOauthConsumer';
+import withDrupalOauthConsumer from '../drupal-oauth/withDrupalOauthConsumer';
 
 const PrivateRoute = ({ component: Component, location, userAuthenticated, ...rest }) => {
   if (!userAuthenticated) {
@@ -100,7 +100,7 @@ import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 
-import withDrupalOauthConsumer from '../Session/withDrupalOauthConsumer';
+import withDrupalOauthConsumer from '../drupal-oauth/withDrupalOauthConsumer';
 
 class Profile extends React.Component {
   state = {
