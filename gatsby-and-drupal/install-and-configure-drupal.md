@@ -136,23 +136,23 @@ Update the `cors.config` section to match the following:
 
 ```yaml
 # Configure Cross-Site HTTP requests (CORS).
-    # Read https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
-    # for more information about the topic in general.
-    # Note: By default the configuration is disabled.
-    cors.config:
+# Read https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+# for more information about the topic in general.
+# Note: By default the configuration is disabled.
+cors.config:
     enabled: true
     # Specify allowed headers, like 'x-allowed-header'.
-    allowedHeaders: ['*']
+    allowedHeaders: ['x-csrf-token','authorization','content-type','accept','origin','x-requested-with', 'access-control-allow-origin','x-allowed-header','*']
     # Specify allowed request methods, specify ['*'] to allow all possible ones.
     allowedMethods: ['*']
     # Configure requests allowed from specific origins.
-    allowedOrigins: ['*']
+    allowedOrigins: ['http://localhost/','http://localhost:8000','http://localhost:9000','*']
     # Sets the Access-Control-Expose-Headers header.
-    exposedHeaders: false
+    exposedHeaders: true
     # Sets the Access-Control-Max-Age header.
     maxAge: false
     # Sets the Access-Control-Allow-Credentials header.
-    supportsCredentials: false
+    supportsCredentials: true
 ```
 
 This configuration is very generic, and it will allow any kind of resource sharing. It's suitable for learning purposes, but you should learn about hardening these settings for a production application. Make sure to update `allowedOrigins` and `allowedMethods` to reflect only the valid domains and HTTP methods that our browser-based applications use. Public APIs can leave these values as is, since they may not know about the consumers that integrate with the API.
