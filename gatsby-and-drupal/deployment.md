@@ -43,7 +43,10 @@ At a high-level you need too:
 
 The right strategy for automating builds however depends largely on knowing your content, your workflow, and the people who will be adding/editing content. There really is no one-size fits all approach.
 
-Brent Robbins from ATEN has a great walk through of setting up Drupal to use the Webhooks module in order to ping Netlify and tell it to run your Gatsby build process whenever a node is created, updated, or deleted. Check out [Decoupled Drupal + Gatsby: Automating Deployment](https://atendesigngroup.com/blog/decoupled-drupal-gatsby-automating-deployment).
+Some possible solutions:
+
+- The [Build Hooks](https://www.drupal.org/project/build_hooks) module was built specifically with Gatsby and Netlify in mind. Though should work with other hosts as well. This one provides the ability to configure a button to build on demand rather than relying on automatic builds on every update.
+- Brent Robbins from ATEN has a great walk through of setting up Drupal to use the Webhooks module in order to ping Netlify and tell it to run your Gatsby build process whenever a node is created, updated, or deleted. Check out [Decoupled Drupal + Gatsby: Automating Deployment](https://atendesigngroup.com/blog/decoupled-drupal-gatsby-automating-deployment).
 
 ## Not every update requires a build
 

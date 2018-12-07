@@ -2,7 +2,7 @@
 
 ## Summary
 
-Gatsby ([https://www.gatsbyjs.org/](https://www.gatsbyjs.org/)) is a fun to use static site generator for [React](https://reactjs.org/) that makes it easy to create blazing fast websites. Gatsby provides a modern framework for turning content into feature-rich, visually engaging apps and websites.
+Gatsby ([https://www.gatsbyjs.org/](https://www.gatsbyjs.org/)) is a fun to use web application generator for [React](https://reactjs.org/) that makes it easy to create blazing fast websites. Gatsby provides a modern framework for turning content into feature-rich, visually engaging apps and websites.
 
 In this tutorial we'll:
 
