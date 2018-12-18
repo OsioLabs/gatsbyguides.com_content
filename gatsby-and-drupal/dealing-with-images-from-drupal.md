@@ -170,19 +170,15 @@ First import the `Img` component:
 import Img from 'gatsby-image';
 ```
 
-Then update the `render` method to output an `Img` component:
+Then update the `Recipe` component to output an `Img` component by adding something like the following to it's return value:
 
 ```javascript
-render() {
-    const {classes} = this.props;
-
-    return (
-      <>
-        <Img fluid={this.props.image.localFile.childImageSharp.fluid} />
-        <Typography variant="headline" paragraph>{this.props.title}</Typography>
-        ...
-    )
-}
+<>
+  {props.image.localFile &&
+    <Img fluid={props.image.localFile.childImageSharp.fluid} />
+  }
+  <Typography variant="headline" paragraph>{props.title}</Typography>
+  // ...
 ```
 
 Notice how `this.props.image.localFile.childImageSharp.fluid` which we pass as a prop to the `Img` component relates to the data structure we requested in our GraphQL query above? This is made super easy by the fact that the `Img` component knows exactly what to do with the data returned by the `...GatsbyImageSharpFluid` GraphQL fragment we used earlier.

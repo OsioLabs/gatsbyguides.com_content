@@ -45,7 +45,7 @@ Here's an example of what we're going for:
 
 We'll start by defining a new `RecipeCard` component which we can use to display recipes on the front page. There's nothing special about this code, it just needs to exist so we can have a nice way of displaying the content.
 
-Code for *src/pages/RecipeCard/RecipeCard.js*:
+Code for *src/components/RecipeCard/RecipeCard.js*:
 
 ```javascript
 import React from 'react'
@@ -294,6 +294,8 @@ In this code we:
 
 - Create a fairly generic `RecipeList` component that takes an array of recipes and displays them as an un-ordered list of links to internal pages using the Gatsby `<Link />` compnent
 - Create a `RecipeListWrapper` component within which we use the `StaticQuery` component provided by Gatsby to query the GraphQL database for the data we want to display. The `StaticQuery` component takes `query` prop which uses the `graphql` tag function to supply a query that we would like the execute. And a `render` function which takes a Component to use to render the results. The results of the query are passed as a props to the provided Component.
+
+Edit the `Recipe` component created in [Dynamically Creating Pages](/content/dynamically-creating-pages.md) and add the new `RecipeList` component to the bottom in order to display additional recipes for someone to read when they complete the one they are viewing.
 
 [Learn more about using the `StaticQuery` component](https://www.gatsbyjs.org/docs/static-query/) to colocate a component with it's data.
 

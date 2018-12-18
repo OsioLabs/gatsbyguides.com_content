@@ -195,7 +195,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import RecipeList from '../RecipeList/RecipeList';
 
 const styles = theme => ({
   // custom CSS here ...
@@ -204,7 +203,7 @@ const styles = theme => ({
 const Recipe = (props) => (
   <>
     <Typography variant="headline" paragraph>{props.title}</Typography>
-    <GridList cols="5" cellHeight="auto">
+    <GridList cols={5} cellHeight="auto">
       <ListItem>
       <ListItemText primary="Difficulty" secondary={props.difficulty} />
     </ListItem>
@@ -230,7 +229,7 @@ const Recipe = (props) => (
     <Typography variant="subheading">Ingredients:</Typography>
     <List dense={true}>
       {
-        props.ingredients.map(item => <ListItem key={item.index}>{item}</ListItem>)
+        props.ingredients.map((item, index) => <ListItem key={index}>{item}</ListItem>)
       }
     </List>
 
@@ -238,7 +237,6 @@ const Recipe = (props) => (
     <Typography variant="body2" paragraph dangerouslySetInnerHTML={{ __html: props.instructions }} />
 
     <Typography variant="subheading">Try another recipe:</Typography>
-    <RecipeList/>
   </>
 );
 

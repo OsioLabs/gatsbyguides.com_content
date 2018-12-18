@@ -136,6 +136,9 @@ class Profile extends React.Component {
 
     if (userInfo.id) {
       try {
+        // This uses the JSON API ?filter= query string parameter to request
+        // just the record for the user with a UID equal to what we retrieved
+        // in the response above.
         let response = await fetch(`http://gatsby-drupal.ddev.local/jsonapi/user/user?filter[uid][value]=${userInfo.id}`, options);
         userData = await response.json();
       } catch(err) {
@@ -246,6 +249,7 @@ Routes created with this approach will exist on the client only and will not cor
 
 ## Additional resources
 
+- [Filtering with JSON API](https://drupalize.me/tutorial/json-api-filtering-collections?p=3003)
 - [@reach/router](https://reach.tech/router)
 - [https://www.gatsbyjs.org/docs/node-apis/#onCreatePage](https://www.gatsbyjs.org/docs/node-apis/#onCreatePage)
 - [https://www.gatsbyjs.org/docs/behind-the-scenes-terminology/#matchpath](https://www.gatsbyjs.org/docs/behind-the-scenes-terminology/#matchpath)

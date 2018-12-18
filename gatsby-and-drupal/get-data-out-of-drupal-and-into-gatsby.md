@@ -46,6 +46,9 @@ npm install --save gatsby-source-drupal
 
 Edit *gatsby-config.js* and add the necessary configuration:
 
+```js
+module.exports = {
+  plugins: [
     {
       resolve: `gatsby-source-drupal`,
       options: {
@@ -53,8 +56,13 @@ Edit *gatsby-config.js* and add the necessary configuration:
         apiBase: `jsonapi`, // optional, defaults to `jsonapi`
       },
     },
+  ],
+}
+```
 
-The `baseUrl` is the base URL of your Drupal site. And `apiBase` is the location at which the JSON API module exposes it's endpoints. By default this is */jsonapi*.
+Plugin configuration is nested within the `plugins:` array. Each entry represents a plugin, and can be either a string that is the name of the plugin to enable for thoes that don't require configuration. Or an object with additional configuration information for the plugin.
+
+The `baseUrl` is the base URL of your Drupal site. So, the location of your Drupal home page. And `apiBase` is the location at which the JSON API module exposes it's endpoints. By default this is */jsonapi*.
 
 Start, or restart, the Gatsby development server after making these changes:
 
@@ -110,7 +118,7 @@ Here's an example query you can try:
       node {
         uuid,
         title,
-        created(formatString: "DD-MMM-YYYY"),
+        created,
         path {
           alias,
         }

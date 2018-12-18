@@ -61,7 +61,7 @@ Pass --help to see all available commands and options.
 
 Use the `gatsby new` command to start a new Gatsby project. This will scaffold a minimum set of required files and configuration. Optionally tell the `gatsby new` command to use one of the available [starter projects](https://www.gatsbyjs.org/docs/gatsby-starters/). For this tutorial we'll use the default starter so you can leave that argument off.
 
-The following command will scaffold a new Gatsby project in the directory *gatsby-drupal/* using the default starter:
+The following command will scaffold a new Gatsby project by creating the directory *gatsby-drupal/*, and then using the default starter to populate it:
 
 ```shell
 gatsby new gatsby-drupal
@@ -180,7 +180,9 @@ const AboutPage = () => (
 export default AboutPage
 ```
 
-Then navigate to [http://localhost:8000/about](http://localhost:8000/about) in your browser to see the page you just created.
+Assuming that `gatsby develop` server is running, when you save this file Gatsby should automatically find it, compile the update version of your application, and make the page available to view.
+
+Navigate to [http://localhost:8000/about](http://localhost:8000/about) in your browser to see the page you just created.
 
 ## What's going on here?
 

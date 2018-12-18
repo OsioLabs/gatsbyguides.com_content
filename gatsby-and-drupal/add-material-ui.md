@@ -66,8 +66,7 @@ const styles = theme => ({
 });
 
 const Layout = (props) => {
-  const {children} = props;
-  const {classes} = props;
+  const {children, classes} = props;
 
   return (
     <StaticQuery
