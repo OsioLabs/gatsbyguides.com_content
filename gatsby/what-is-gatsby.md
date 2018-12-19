@@ -1,4 +1,4 @@
-# What is Gatsby?
+# What Is Gatsby?
 
 ## Summary
 
@@ -21,7 +21,7 @@ Simply put, Gatsby is a CLI tool, written in Node, that generates static HTML an
 
 ![Illustration showing React component being converted to static HTML.](/content/gatsby/images/gatsby-and-drupal.png)
 
-Gatsby applications are more than just static HTML. (((Using [hydration](https://medium.com/@baphemot/understanding-reactjs-data-hydration-initialization-bacbb790c7cb), after the static HTML assets are served to the user and displayed super fast.))) The HTML DOM is hydrated with the same React application that was used to generate the HTML in the first place. At that point, it's mutated into a full progressive web application.
+Gatsby applications are more than just static HTML. By using [hydration](https://medium.com/@baphemot/understanding-reactjs-data-hydration-initialization-bacbb790c7cb), after the static HTML assets are served to the user, the HTML DOM is hydrated with the same React application that was used to generate the HTML in the first place. At that point, it's mutated into a full progressive web application.
 
 Through this process, Gatsby can be used to create applications that handle things like user authentication and personalization, as well as dynamic content -- something you don't find in most "static site generators". In many ways it's like [create-react-app](https://github.com/facebook/create-react-app) with a bunch of extra features for working with content already baked in.
 
