@@ -8,11 +8,11 @@ In this tutorial you will:
 
 - Get Gatsby installed and confirm that it's working
 - Use the `gatsby new` command to scaffold a new project
-- Create a "Hello World" site that consists of two pages, a home page, and an about page
+- Create a "Hello World" site that consists of two pages: a home page and an about page
 
-Instead of going into to much detail here we'll walk through the required steps, and link to existing resources that provide in-depth information if you want to explore things further.
+Instead of going into too much detail here, we'll walk through the required steps and link to existing resources that provide in-depth information so you can explore things further.
 
-By the end of this tutorial you will be able to create a two page "Hello World" site using Gatsby, and understand the essential pieces of any Gatsby project.
+By the end of this tutorial you will be able to create a two-page "Hello World" site using Gatsby, and you'll understand the essential pieces of any Gatsby project.
 
 ## Goal
 
@@ -25,7 +25,7 @@ Create a static site with a home page and an about page using Gatsby.
 
 ## Install the Gatsby CLI
 
-The Gatsby CLI can be installed by running the following npm command:
+The Gatsby CLI can be installed by running the following `npm` command:
 
 ```shell
 npm install --global gatsby-cli
@@ -33,7 +33,7 @@ npm install --global gatsby-cli
 
 ## Test that it worked
 
-To test that it worked run the command `gatsby` with no arguments. It should output the help text for the Gatsby CLI.
+To test whether it worked, run the command `gatsby` with no arguments. It should output the help text for the Gatsby CLI.
 
 Example:
 
@@ -59,9 +59,9 @@ Pass --help to see all available commands and options.
 
 ## Start a new Gatsby project
 
-Use the `gatsby new` command to start a new Gatsby project. This will scaffold a minimum set of required files and configuration. Optionally tell the `gatsby new` command to use one of the available [starter projects](https://www.gatsbyjs.org/docs/gatsby-starters/). For this tutorial we'll use the default starter so you can leave that argument off.
+Use the `gatsby new` command to start a new Gatsby project. This will scaffold a minimum set of required files and configuration. Optionally, tell the `gatsby new` command to use one of the available [starter projects](https://www.gatsbyjs.org/docs/gatsby-starters/). For this tutorial we'll use the default starter so you can leave that argument off.
 
-The following command will scaffold a new Gatsby project by creating the directory *gatsby-drupal/*, and then using the default starter to populate it:
+The following command will scaffold a new Gatsby project by creating the directory *gatsby-drupal/*, and then populate it using the default starter:
 
 ```shell
 gatsby new gatsby-drupal
@@ -118,7 +118,7 @@ Once the development server is started the command will output a URL, most likel
 
 You can stop the development server by returning to the Terminal window where it is running and typing <key>CTRL</key>-<key>c</key>.
 
-The `gatsby new` command you ran earlier should have created a bunch of standard Gatsby application related files like so:
+The `gatsby new` command you ran earlier should have created a bunch of standard Gatsby application-related files like so:
 
 ```txt
 .
@@ -156,7 +156,7 @@ The `gatsby new` command you ran earlier should have created a bunch of standard
 
 You can read more about the standard [Gatsby Project Structure](https://www.gatsbyjs.org/docs/gatsby-project-structure/).
 
-With the development server running open the file *src/pages/index.js* in your editor. Change some of the text in the file and save it. The Gatsby development server should automatically rebuild your preview and refresh the content in your browser. One of the best developer experience features of Gatsby is it's hot-reloading development server and the ability to preview your changes in near realtime.
+With the development server running, open the file *src/pages/index.js* in your editor. Change some of the text in the file and save it. The Gatsby development server should automatically rebuild your preview and refresh the content in your browser. One of the best developer experience features of Gatsby is its hot-reloading development server and the ability to preview your changes nearly in realtime.
 
 ## Add a new page
 
@@ -171,7 +171,7 @@ import Layout from '../components/layout'
 const AboutPage = () => (
   <Layout>
     <h1>About</h1>
-    <p>This application is a curated set of the best recipes around carefully
+    <p>This application is a curated set of the best recipes around, carefully
       selected just for our members.</p>
     <Link to="/">Home</Link>
   </Layout>
@@ -180,24 +180,24 @@ const AboutPage = () => (
 export default AboutPage
 ```
 
-Assuming that `gatsby develop` server is running, when you save this file Gatsby should automatically find it, compile the update version of your application, and make the page available to view.
+Assuming that the `gatsby develop` server is running, when you save this file Gatsby should automatically find it, compile the updated version of your application, and make the page available to view.
 
 Navigate to [http://localhost:8000/about](http://localhost:8000/about) in your browser to see the page you just created.
 
 ## What's going on here?
 
-At a really high-level; Gatsby treats files within the special *src/pages/* directory as individual pages to render. The file names are translated to a route. In this case *about.js* becomes */about*. And the HTML that results from rendering the React component exported by *about.js* is used to populate the route by saving it to a file like */about/index.html* which is then served to your browser.
+At a really high-level: Gatsby treats files within the special *src/pages/* directory as individual pages to render. The file names are translated to a route. In this case *about.js* becomes */about*. The HTML that results from rendering the React component exported by *about.js* is used to populate the route by saving it to a file like */about/index.html* which is then served to your browser.
 
-And tada 🎉  you've generated a static site.
+And ta-da 🎉  you've generated a static site.
 
 ## Recap
 
-In this tutorial we installed the Gatsby CLI, confirmed that it was working, used it to scaffold a new Gatsby project, and then ran the built in development server so we could preview our work in near real time. Then we added a new */about* page to our project. All of this gives us a good starting point for building our Gatsby based application and serves as a litmus test to confirm we can get all the pieces working.
+In this tutorial we installed the Gatsby CLI, confirmed that it was working, used it to scaffold a new Gatsby project, and then ran the built-in development server so we could preview our work in near real time. Then we added a new */about* page to our project. All of this gives us a good starting point for building our Gatsby-based application and serves as a litmus test to confirm we can get all the pieces working.
 
 ## Further your understanding
 
 - Try running the `gatsby build` command and take a look at the static HTML files it outputs.
-- [The official Gatsby tutorial](https://www.gatsbyjs.org/tutorial/) (gatsbyjs.org) provides a great starting point and in-depth explanations of many of the core concepts of Gatsby. If you're new to Gatsby this should be considered required reading
+- [The official Gatsby tutorial](https://www.gatsbyjs.org/tutorial/) (gatsbyjs.org) provides a great starting point and in-depth explanations of many of the core concepts of Gatsby. If you're new to Gatsby this should be considered required reading.
 
 ## Additional resources
 
