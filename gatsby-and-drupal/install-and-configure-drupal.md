@@ -2,15 +2,15 @@
 
 ## Summary
 
-If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access it. Then install the JSON API module, and make a couple of configuration changes.
+If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access. Then install the JSON API module and make a couple of configuration changes.
 
 In this tutorial we'll:
 
 - Install the latest version of Drupal 8
 - Install the contributed modules required to facilitate interaction with Gatsby
-- Make some configuration changes in Drupal required to allow Gatsby to access data
+- Make some configuration changes in Drupal to allow Gatsby to access data
 
-By the end of this tutorial you should have a working Drupal 8 site with some demo content that you can use as a backend data source for your Gatsby project. As well as a solid understanding of what's required to get any Drupal site into a state that it can work with Gatsby.
+By the end of this tutorial you should have a working Drupal 8 site with some demo content that you can use as a backend data source for your Gatsby project. You should clearly understand what's required to get any Drupal site into a state that can work with Gatsby.
 
 ## Goal
 
@@ -18,9 +18,9 @@ Install the latest version of Drupal on your development environment and configu
 
 ## Prerequisites
 
-For the purposes of this tutorial we'll install Drupal on our [localhost](http://localhost) alongside Gatsby so we can easily do development for both at the same time. Alternatively you can install Drupal using a hosting provider like [Pantheon](https://pantheon.io/) that allows you to have a development demo site.
+For the purposes of this tutorial we'll install Drupal on our [localhost](http://localhost) alongside Gatsby so we can easily do development for both at the same time. Alternatively, you can install Drupal using a hosting provider like [Pantheon](https://pantheon.io/) that allows you to have a development demo site.
 
-If you've already got an existing Drupal site and want to update it so that it can be integrated with Gatsby this tutorial will cover everything you need to know do to so. Skip the parts about getting Drupal installed and start with installing the JSON API module.
+If you've already got an existing Drupal site and want to update it so that it can be integrated with Gatsby, this tutorial will cover everything you need to do so. Skip the parts about getting Drupal installed and start with installing the JSON API module.
 
 ## Requirements for using Drupal as a backend for Gatsby
 
@@ -29,12 +29,12 @@ In order to use Drupal as a backend data source for Gatsby you need:
 1. Drupal 8 installed
 2. The contributed JSON API module enabled
 3. Permissions configured so that anonymous traffic can access the JSON API provided REST endpoints
-4. Optional, but recommended, the contributed JSON API Extras and Simple OAuth modules enabled
-5. Durupal configured to support CORS
+4. The contributed JSON API Extras and Simple OAuth modules enabled (optional, but recommended)
+5. Drupal configured to support CORS
 
 ## Install Drupal
 
-For this tutorial we'll install Drupal 8's Umami demo profile gives us a basic data model and some content we can use while learning. If you're following along with these tutorials in order to build your own application feel free to start with Drupal's standard profile and construct your own data model as required.
+For this tutorial we'll install Drupal 8's Umami demo profile, which gives us a basic data model and some content we can use while learning. If you're following along with these tutorials in order to build your own application feel free to start with Drupal's standard profile and construct your own data model as required.
 
 This makes a lot of assumptions, but the quickest way to get something up and running to follow along with these tutorials is as follows:
 
@@ -45,7 +45,7 @@ composer require drupal/jsonapi drupal/jsonapi_extras drupal/simple_oauth
 php web/core/scripts/drupal quick-start demo_umami
 ```
 
-For a more in-depth look at what's required to get Drupal installed and running on a local development environment check-out [Chapter 3: Installation](https://drupalize.me/series/user-guide/installation-chapter) of the Drupal 8 User Guide.
+For a more in-depth look at what's required to get Drupal installed and running on a local development environment, check out [Chapter 3: Installation](https://drupalize.me/series/user-guide/installation-chapter) of the Drupal 8 User Guide.
 
 ## Download and enable contributed modules
 
@@ -53,7 +53,7 @@ In order to get Drupal and Gatsby to play well together we'll install the follow
 
 - [JSON API](https://www.drupal.org/project/jsonapi): This is the only one that's required for the integration to work. JSON API provides zero-configuration REST access to all the content in your Drupal site using the [{json:api}](https://jsonapi.org/) spec.
 - [JSON API Extras](https://www.drupal.org/project/jsonapi_extras): Allows us to tweak the configuration of the JSON API module. We'll use this to disable resource endpoints that we don't need exposed.
-- [Simple OAuth](https://www.drupal.org/project/simple_oauth): We'll use this, and the included Simple OAuth Extras module to turn Drupal into an OAuth 2 provider. Our Gatsby application can then use Drupal for user account storage, authentication, and authorization.
+- [Simple OAuth](https://www.drupal.org/project/simple_oauth): We'll use this, and the included Simple OAuth Extras module, to turn Drupal into an OAuth 2 provider. Our Gatsby application can then use Drupal for user account storage, authentication, and authorization.
 
 The quickest way to download these all is using Composer. From the root of your Drupal project execute the following command:
 
@@ -71,11 +71,11 @@ You can confirm that JSON API is working by navigating to the URL */jsonapi* on 
 
 ## Configure permissions
 
-Edit the permissions and give the Anonymous role the *Access JSON API resource list* permissions. Without this Gatsby will get an HTTP 406 when trying to access the root listing at */jsonapi*.
+Edit the permissions to give the Anonymous role the *Access JSON API resource list* permissions. Without this Gatsby will get an HTTP 406 when trying to access the root listing at */jsonapi*.
 
 In the Manage administration menu navigate to *People* > *Permissions*. Click the box for *Access JSON API resource list* under the Anonymous User header.
 
-![Screenshot of the Drupal permissions page with the checkbox for the JSON API access resource list checked for anon users.](/content/images/gatsby-and-drupal/images/permissions-jsonapi.png)
+![Screenshot of the Drupal permissions page with the checkbox for the JSON API access resource list checked for anon users.](/content/gatsby-and-drupal/images/permissions-jsonapi.png)
 
 Then scroll to the bottom of the page and click *Save permissions*.
 
@@ -109,10 +109,12 @@ chmod 600 private.key
 
 Then tell the Simple OAuth module where to find them. In your Drupal site, in the Manage administrative menu navigate to *Configuration* > *Simple OAuth* and fill in the form with the paths to the keys you just generated.
 
+```shell
 Access token expiration time: 300
 Refresh token expiration time 1209600
 Public Key: ../keys/public.key
 Private Key: ../keys/private.key
+```
 
 ![Screenshot of simple oauth configuration form with settings listed above.](/content/gatsby-and-drupal/images/simpleoauth-settings.png)
 
@@ -128,7 +130,7 @@ Finally, give authenticated users permission to *Grant OAuth 2 codes*. In the Ma
 
 ## Configure CORS
 
-If you're only using Drupal as a data source for Gatsby during the build phase this isn't required. However, if you plan to write code in your application that dynamically queries Drupal you'll need to setup [Cross Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). We'll do this in our example application when we talk about hybrid pages and client only routes. So go ahead and configure it now.
+If you're only using Drupal as a data source for Gatsby during the build phase this isn't required. However, if you plan to write code in your application that dynamically queries Drupal you'll need to set up [Cross Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). We'll do this in our example application when we talk about hybrid pages and client only routes. So go ahead and configure it now.
 
 Drupal 8 core provides support for CORS since 8.2, but it's turned off by default. To turn it on you will need to edit your *sites/default/services.yml* file. If you do not have one, you can create it by copying *sites/default/default.services.yml* and renaming it *sites/default/services.yml*.
 
@@ -155,15 +157,15 @@ cors.config:
     supportsCredentials: true
 ```
 
-This configuration is very generic, and it will allow any kind of resource sharing. It's suitable for learning purposes, but you should learn about hardening these settings for a production application. Make sure to update `allowedOrigins` and `allowedMethods` to reflect only the valid domains and HTTP methods that our browser-based applications use. Public APIs can leave these values as is, since they may not know about the consumers that integrate with the API.
+This configuration is very generic, and it will allow any kind of resource sharing. It's suitable for learning purposes, but you should learn about hardening these settings for a production application. Make sure to update `allowedOrigins` and `allowedMethods` to reflect only the valid domains and HTTP methods that your browser-based applications use. Public APIs can leave these values as is, since they may not know about the consumers that integrate with the API.
 
-When *services.yml* is updated, you need to [clear caches](https://drupalize.me/tutorial/clear-drupals-cache) for the changes to be applied.
+After *services.yml* is updated, you need to [clear caches](https://drupalize.me/tutorial/clear-drupals-cache) for the changes to be applied.
 
 ## Recap
 
-In this tutorial we; Downloaded and installed Drupal and the JSON API, JSON API Extras, and Simple OAuth contributed modules. Then made changes to default configuration necessary to allow Gatsby to access the data and users on our site. Including adjusting permissions related to accessing JSON API data and OAuth tokens, generating public/private keys for OAuth encryption, and enabling CORS support.
+In this tutorial we downloaded and installed Drupal and the JSON API, JSON API Extras, and Simple OAuth contributed modules. Then we made changes to the default configuration necessary to allow Gatsby to access the data and users on our site. We adjusted permissions related to accessing JSON API data and OAuth tokens, generating public/private keys for OAuth encryption, and enabling CORS support.
 
-With all of these steps complete your Drupal site is ready to serve as both a data source for Gatsby's build process as well as the target for dynamic API queries in React. Consumers will be able to access all of your site's content via the */jsonapi* endpoint. As well as authenticate and authorize users via OAuth.
+With all of these steps complete your Drupal site is ready to serve as both a data source for Gatsby's build process as well as the target for dynamic API queries in React. Consumers will be able to access all of your site's content via the */jsonapi* endpoint, as well as authenticate and authorize users via OAuth.
 
 ## Further your understanding
 
@@ -172,4 +174,4 @@ With all of these steps complete your Drupal site is ready to serve as both a da
 
 ## Additional resources
 
-- The Drupalize.Me [Web Services in Drupal 8](https://drupalize.me/series/web-services-drupal-8) series provides extensive documentation for using JSON API and OAuth with Drupal
+- The Drupalize.Me [Web Services in Drupal 8](https://drupalize.me/series/web-services-drupal-8) series provides extensive documentation for using JSON API and OAuth with Drupal.
