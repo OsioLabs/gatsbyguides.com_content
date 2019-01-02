@@ -1,7 +1,6 @@
 # What Is Gatsby?
 
-## Summary
-
+[# summary #]
 Gatsby ([https://www.gatsbyjs.org/](https://www.gatsbyjs.org/)) is a fun-to-use web application generator for [React](https://reactjs.org/) that makes it easy to create blazing fast websites. Gatsby provides a modern framework for turning content into feature-rich, visually engaging apps and websites.
 
 In this tutorial we'll:
@@ -10,6 +9,7 @@ In this tutorial we'll:
 - Link to lots of additional resources for exploring more about Gatsby and its use-case
 
 By the end of this tutorial you should have a better understanding of what Gatsby is and what you can do with it.
+[# endsummary #]
 
 ## Goal
 

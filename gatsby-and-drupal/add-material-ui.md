@@ -1,7 +1,6 @@
 # Add Material UI
 
-## Summary
-
+[# summary #]
 In order to give our application some style we'll use the popular [Material UI component library](https://material-ui.com/). A set of React components that implement the Google Material UI design language.
 
 Using it is not required to learn how to integrate Drupal & Gatsby together, but we enjoy working with it and it allows us to focus on the important parts of these tutorials while still being able create an application with some basic styling.
@@ -12,6 +11,7 @@ In this tutorial we'll:
 - Update our applications existing components to make use of the components provided by the @material-ui/core library
 
 By the end of this tutorial your application should use some components from the Material UI library to give it a bit of extra style.
+[# endsummary #]
 
 ## Goal
 

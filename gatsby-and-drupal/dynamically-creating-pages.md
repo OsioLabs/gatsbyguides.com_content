@@ -1,7 +1,6 @@
 # Dynamically Creating Pages
 
-## Summary
-
+[# summary #]
 Now that you've got data being pulled into Gatsby's GraphQL database via one or more source plugins the next step is to use that data to dynamically generate pages at build time. In our example we're consuming a set of Recipes from our Drupal site, and now we need to generate a static HTML page for each of the N recipes.
 
 In this tutorial we'll:
@@ -11,6 +10,7 @@ In this tutorial we'll:
 - Learn about the concept of page queries in Gatsby
 
 By the end of this tutorial you'll know how to create static pages at build time in a Gatsby application based on data sourced from Drupal. Or any other source that Gatsby supports.
+[# endsummary #]
 
 ## Goal
 

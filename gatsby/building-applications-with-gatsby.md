@@ -1,7 +1,6 @@
 # Building Applications with Gatsby
 
-## Summary
-
+[# summary #]
 Gatsby applications are so much more than just static HTML sites. Any site you build with Gatsby is a complete progressive web application. Complete with support for offline access, pre-fetching and pre-caching data, dynamic requests executed at runtime and more. Gatsby doesn't just spit out static HTML files rendered from React components. It creates a complete React application. Which means your Gatsby application can do anything you would do with vanilla React.
 
 In this tutorial we'll:
@@ -10,6 +9,7 @@ In this tutorial we'll:
 - Define two different approaches for dealing with dynamic content in a Gatsby application
 
 By the end of this tutorial you should have a better understanding of how Gatsby infuses the static HTML it generates with a React so that you can enhance your static HTML with dynamic elements. As well as be able to define two different approaches for doing so, and choose the right one for your use case.
+[# endsummary #]
 
 ## Goal
 

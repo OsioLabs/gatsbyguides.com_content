@@ -1,7 +1,6 @@
 # Creating Lists of Content
 
-## Summary
-
+[# summary #]
 You'll probably need to provide users with lists so they can see what content is available to in your application. And those lists will need to be kept up-to-date as content is added, edited, or removed. This requires querying GraphQL to get the titles, and paths, for pages you want to link to and then using the `Link` component provided by *gatsby-link* to create clickable links to those pages at build time.
 
 In this tutorial we'll:
@@ -11,6 +10,7 @@ In this tutorial we'll:
 - Use the Gatsby `Link` component to create blazing fast internal links within our application.
 
 By the end of this tutorial you'll know how to use both page queries, and static queries to generate lists of content links from the GraphQL database at build time.
+[# endsummary #]
 
 ## Goal
 

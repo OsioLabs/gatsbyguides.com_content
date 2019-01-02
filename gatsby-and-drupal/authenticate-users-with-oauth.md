@@ -1,7 +1,6 @@
 # Authenticate Users with OAuth
 
-## Summary
-
+[# summary #]
 User authentication is a key component to many web applications. It allows the client application to identify the current user, and to potentially change their experience based on that information. Additionally, an authenticated user can also be authorized to perform specific actions depending on their account's permissions.
 
 There are many different authentication and authorization patterns. OAuth is a common one, and the one we'll focus on in this tutorial. In the way we use it OAuth is similar to JSON Web Tokens (JWT), another approach commonly used with React applications. Drupal can be configured to act as the provider for both.
@@ -13,6 +12,7 @@ In this tutorial we'll:
 - Verify it's working by showing/hiding a component depending on the current user's authentication state
 
 By the end of this tutorial you'll have a better understanding of how to integrate authentication into a Gatsby application, and specifically how to authenticate users's against a Drupal OAuth provider.
+[# endsummary #]
 
 ## Goal
 

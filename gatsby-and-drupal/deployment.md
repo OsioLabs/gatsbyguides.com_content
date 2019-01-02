@@ -1,7 +1,6 @@
 # Deploying Your Application
 
-## Summary
-
+[# summary #]
 One of the benefits of using a tool like Gatsby that generates static files for your application is that the requirements for a hosting environment are pretty minimal. You can deploy to countless hosting solutions such as Netlify, Cloudfront, and GitHub Pages. With minimal effort.
 
 However, there's still some things we can do to improve the experience like using CI/CD to automatically build and deploy our application when changes are merged in Git. Or integration with our CMS so that when an editor adds or edits content it triggers a build of the application.
@@ -12,6 +11,7 @@ In this tutorial we'll:
 - Learn about ways you could trigger a build from Drupal
 
 By the end of this tutorial you should have some ideas about how, and where, to deploy your production Gatsby application.
+[# endsummary #]
 
 ## Goal
 

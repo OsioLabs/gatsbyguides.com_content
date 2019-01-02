@@ -1,7 +1,6 @@
 # Hello World!
 
-## Summary
-
+[# summary #]
 The first step in building an application with Gatsby is getting the Gatsby CLI installed, and then using it to scaffold a "Hello World" site. Doing so will let you confirm that all the pieces are working, and give you a chance to walk through the essential components of a Gatsby application.
 
 In this tutorial you will:
@@ -13,6 +12,7 @@ In this tutorial you will:
 Instead of going into too much detail here, we'll walk through the required steps and link to existing resources that provide in-depth information so you can explore things further.
 
 By the end of this tutorial you will be able to create a two-page "Hello World" site using Gatsby, and you'll understand the essential pieces of any Gatsby project.
+[# endsummary #]
 
 ## Goal
 

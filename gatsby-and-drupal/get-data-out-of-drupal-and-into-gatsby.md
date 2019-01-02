@@ -1,7 +1,6 @@
 # Get Data Out of Drupal and Into Gatsby
 
-## Summary
-
+[# summary #]
 One of the killer features of Gatsby is its ability to pull in data from various sources at build time, and then use that data to dynamically generate what will eventually become the static pages of your site. Rather than hard-code a specific data source, Gatsby uses source plugins to allow developers to choose from a variety of different data sources, including Drupal.
 
 In this tutorial we'll:
@@ -11,6 +10,7 @@ In this tutorial we'll:
 - Connect our Gatsby environment to Drupal and test that it's all working by exploring Gatsby's GraphQL database
 
 By the end of this tutorial you'll know what source plugins are, the role they play in a Gatsby project, and how to use the *gatsby-source-drupal* plugin to pull data out of Drupal and into Gatsby at build time.
+[# endsummary #]
 
 ## Goal
 

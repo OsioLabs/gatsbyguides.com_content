@@ -1,7 +1,6 @@
 # Create Client Only Routes
 
-## Summary
-
+[# summary #]
 For some pages none of the page needs to be server rendered as all data will be loaded live from your API after the user logs in. For example, a user account page that displays a user's personal profile and data. It's only accessible to the user, and the content is completely dynamic. Another example is the checkout funnel of an e-commerce application, the contents of your cart, and all of the payment related pages are completely dynamic and unique for each use.
 
 In this tutorial we'll:
@@ -11,6 +10,7 @@ In this tutorial we'll:
 - Write some React components to handle routing and rendering content for client only routes
 
 By the end of this tutorial you should know how to register one or more client only routes in your Gatsby application, and then populate them with content on the client-side when a user access that route.
+[# endsummary #]
 
 ## Goal
 

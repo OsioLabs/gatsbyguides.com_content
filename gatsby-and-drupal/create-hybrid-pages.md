@@ -1,7 +1,6 @@
 # Create Hybrid Pages
 
-## Summary
-
+[# summary #]
 One method for creating dynamic pages with Gatsby is to create pages that are mostly static with dynamic elements being filled in after the initial page load. This technique is especially useful for pages where the majority of the content on the page is the same for every user, but small parts of the page are personalized, or require user authentication.
 
 In this tutorial we'll:
@@ -10,6 +9,7 @@ In this tutorial we'll:
 - Modify our Gatsby application so that anonymous users see a teaser of each recipe, while authenticated users get full access all of the recipes details
 
 By the end of this tutorial you should know how to build pages that protect access to some content, as well has have a better understanding of the hybrid pages approach to building dynamic content pages in Gatsby.
+[# endsummary #]
 
 ## Goal
 

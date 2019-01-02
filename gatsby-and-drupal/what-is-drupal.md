@@ -1,7 +1,6 @@
 # An Introduction to Drupal for Gatsby Developers
 
-## Summary
-
+[# summary #]
 Drupal is an open-source content management system with a robust set of tools for data modeling and customizing the experience of content authors and editors. It also provides a robust web services API that allows it to operate as the backend content repository for any number of front-end clients. It's also super easy to integrate with Gatsby.
 
 In this tutorial we will:
@@ -9,6 +8,7 @@ In this tutorial we will:
 - Learn about what Drupal is, and why it's a good choice as a CMS backend for your Gatbsy application
 
 By the end of this tutorial you should have a better understanding of what Drupal is, and what its use-cases are.
+[# summary #]
 
 ## Goal
 

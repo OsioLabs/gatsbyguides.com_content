@@ -1,7 +1,6 @@
 # Install and Configure Drupal
 
-## Summary
-
+[# summary #]
 If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access. Then install the JSON API module and make a couple of configuration changes.
 
 In this tutorial we'll:
@@ -11,6 +10,7 @@ In this tutorial we'll:
 - Make some configuration changes in Drupal to allow Gatsby to access data
 
 By the end of this tutorial you should have a working Drupal 8 site with some demo content that you can use as a backend data source for your Gatsby project. You should clearly understand what's required to get any Drupal site into a state that can work with Gatsby.
+[# endsummary #]
 
 ## Goal
 

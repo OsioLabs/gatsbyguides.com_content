@@ -1,7 +1,6 @@
 # Dealing with Images from Drupal
 
-## Summary
-
+[# summary #]
 One of the benefits of using Gatsby is it's built in support for image optimization. Gatsby makes it easier to use best-practices techniques like blur-up or svg tracing to ensure images don't slow down page loads. As well as providing utilities that allow developers to request an image at a specific size, or set of sizes.
 
 In this tutorial we'll:
@@ -11,6 +10,7 @@ In this tutorial we'll:
 - Update our `Recipe` component to display images using the blur-up pattern
 
 By the end of this tutorial you should know how to display images sourced from Drupal using the blur-up technique with Gatsby.
+[# summary #]
 
 ## Goal
 
