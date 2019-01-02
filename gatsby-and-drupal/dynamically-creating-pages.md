@@ -23,15 +23,15 @@ Create static pages in Gatsby for each recipe sourced from Drupal.
 
 ## What's going on here?
 
-In order to generate static pages for the content in Gatsby's GraphQL database, we need to do a couple of things. First, we need to query the database and make a list of what pages we want Gatsby to generate at what path. To do this, we implement Gatsby's `createPages()` Node API; query the GraphQL database for a list of pages we want to generate; and then provide Gatsby with some information about those pages. This information includes the route that we want the page to live at, the template we want to use to render the HTML for the page, and enough contextual information so that the template component can extract the rest of the information it needs from database at build time.
+In order to generate static pages for the content in Gatsby's GraphQL database, we need to do a couple of things. First, we need to query the database and make a list of what pages we want Gatsby to generate at what path. To do this, we implement Gatsby's `createPages()` Node API; query the GraphQL database for a list of pages we want to generate; and then provide Gatsby with some information about those pages. This information includes the route that we want the page to live at, the template we want to use to render the HTML for the page, and enough contextual information so that the template component can extract the rest of the information it needs from the database at build time.
 
 Then we need to write a React component to use as a template for rendering each individual page, as well as a GraphQL page query that Gatsby will run to obtain the data required to build the page, and then automatically inject as `props.data` into our component.
 
 ## Implement Gatsby's `createPages()` API
 
-Tell Gatsby about the pages you want it to render by implementing the `creagePages()` API. This is done by exporting a functioned named `createPages` from the specially named *gatsby-node.js* file at the root of your project. Go ahead and create the file if it doesn't already exist.
+Tell Gatsby about the pages you want it to render by implementing the `createPages()` API. This is done by exporting a functioned named `createPages` from the specially-named *gatsby-node.js* file at the root of your project. Go ahead and create the file if it doesn't already exist.
 
-The `createPages()` function is called during the build process and passed an actions object which contains a collection of actions you can use to manipulate Gatsby's internal state. Gatsby uses Redux internally to manage state, and "actions" in this case are basically the same as `boundActionCreators` in Redux. In this instance we'll use the `createPage` action to add one more more items to the list of things Gatsby should build. [Read more about the `createPage` action](https://www.gatsbyjs.org/docs/actions/#createPage).
+The `createPages()` function is called during the build process and passed an actions object which contains a collection of actions you can use to manipulate Gatsby's internal state. Gatsby uses Redux internally to manage state, and "actions" in this case are basically the same as `boundActionCreators` in Redux. In this instance we'll use the `createPage` action to add one or more items to the list of things Gatsby should build. [Read more about the `createPage` action](https://www.gatsbyjs.org/docs/actions/#createPage).
 
 Here's the code that goes in *gatsby-node.js*:
 
@@ -87,15 +87,15 @@ exports.createPages = ({ graphql, actions }) => {
 
 What this code does:
 
-- Exports a new function named `createPages`. The name here is important; it's how Gatsby knows this function contains the code we want to execute during the page generation phase of the build process.
+- Exports a new function named `createPages`. The name here is important: it's how Gatsby knows this function contains the code we want to execute during the page-generation phase of the build process.
 - Gatsby passes an object into the function and we extract the `graphql` function and `actions` object from it. Then we further destructure the `actions` object to get the `createPage` function we'll use later.
 - The function returns a `Promise`.
-- First we execute a query against Gatsby's internal GraphQL database. In this case we only need to get a minimal amount of information. The list of recipes to generate, the path we want to use for accessing the recipe, and the drupal_id of the recipe.
-- Then we take a loop over the results returned from the query. For each row we first figure out what path we want to the recipe to live at. In this case, if there's a custom path already set within Drupal we'll use it, and if not we'll use a generic one. Then for each row we call the `createPage` action and give it the path we want to use, the component to use when rendering the HTML for the path, and some additional contextual information we want made available to the template component. In this case, that's the recipe's drupal_id so we can use that to query for the complete recipe at build time.
+- First we execute a query against Gatsby's internal GraphQL database. In this case we only need to get a minimal amount of information: the list of recipes to generate, the path we want to use for accessing the recipe, and the drupal_id of the recipe.
+- Then we take a loop over the results returned from the query. For each row, we first figure out what path we want to the recipe to live at. In this case, if there's a custom path already set within Drupal we'll use it, and if not we'll use a generic one. Then for each row we call the `createPage` action and give it the path we want to use, the component to use when rendering the HTML for the path, and some additional contextual information we want made available to the template component. In this case, that's the recipe's drupal_id so we can use that to query for the complete recipe at build time.
 
 ## Define a recipe template
 
-Next we need to define the template that is used to render the HTML for a recipe. Based on the code above, this should live in *src/templates/recipe.js*. And export a React component, and a page query.
+Next we need to define the template that is used to render the HTML for a recipe. Based on the code above, this should live in *src/templates/recipe.js*. We need to export a React component, and a page query.
 
 **Organization tip:** Instead of defining the HTML for your dynamic page in the template component, create a separate component that does the bulk of the work and use the template as a wrapper around that one.
 
@@ -267,7 +267,7 @@ Astute Drupal developers might have noticed that the recipe pages display the ca
 
 ## Dealing with text from Drupal
 
-When handling the contents of a long text field, and some other field types as well, Drupal gives us access to both the `raw`, and `processed` content. The `raw` content is exactly what was entered into the text field by the user, while the `processed` content is the result of applying the selected text format to the content. Generally, it's best practice to make use of the `processed` value as it has been formatted and filtered to prevent security vulnerabilities that could arise from working with user generated content. You can see examples of this in the code above like `instructions={recipe.instructions.processed}`.
+When handling the contents of a long text field, and some other field types as well, Drupal gives us access to both the `raw` and `processed` content. The `raw` content is exactly what was entered into the text field by the user, while the `processed` content is the result of applying the selected text format to the content. Generally, it's best practice to make use of the `processed` value as it has been formatted and filtered to prevent security vulnerabilities that could arise from working with user generated content. You can see examples of this in the code above like `instructions={recipe.instructions.processed}`.
 
 An exception to this might be if you're using Markdown in Drupal. If you've got fields in Drupal configured to support Markdown formatting, the `processed` value will contain the HTML resulting from applying Drupal's Markdown filter. The `raw` value will contain the unaltered Markdown formatted text. You could pass that through the remark Markdown processing that Gatsby uses for handling Markdown content at run time.
 
