@@ -1,14 +1,14 @@
 # Add Material UI
 
 [# summary #]
-In order to give our application some style we'll use the popular [Material UI component library](https://material-ui.com/). A set of React components that implement the Google Material UI design language.
+In order to give our application some style we'll use the popular [Material UI component library](https://material-ui.com/). It's a set of React components that implement the Google Material UI design language.
 
-Using it is not required to learn how to integrate Drupal & Gatsby together, but we enjoy working with it and it allows us to focus on the important parts of these tutorials while still being able create an application with some basic styling.
+Using Material UI is not required to learn how to integrate Drupal and Gatsby together, but we enjoy working with it, and it allows us to focus on the important parts of these tutorials while still being able to create an application with some basic styling.
 
 In this tutorial we'll:
 
 - Install @material-ui/core
-- Update our applications existing components to make use of the components provided by the @material-ui/core library
+- Update our application's existing components to make use of the components provided by the @material-ui/core library
 
 By the end of this tutorial your application should use some components from the Material UI library to give it a bit of extra style.
 [# endsummary #]
@@ -19,13 +19,13 @@ Install Material UI library and use it to provide some styling for your applicat
 
 ## Install Material UI component library
 
-Install the library, react-jss is required for our integration with Gatsby:
+Integration with Gatsby requires that we install the library with react-jss:
 
 ```shell
 npm install --save @material-ui/core react-jss
 ```
 
-We also need a couple of helper files from the [Material UI + Gatsby example](https://github.com/mui-org/material-ui/tree/master/examples/gatsby) to make it easier to integrate this library into our project. Specifically the [withRoot.js](https://raw.githubusercontent.com/mui-org/material-ui/master/examples/gatsby/src/withRoot.js), and [getPageContext.js](https://raw.githubusercontent.com/mui-org/material-ui/master/examples/gatsby/src/getPageContext.js) components:
+We also need a couple of helper files from the [Material UI + Gatsby example](https://github.com/mui-org/material-ui/tree/master/examples/gatsby) to make it easier to integrate this library into our project. They are the [withRoot.js](https://raw.githubusercontent.com/mui-org/material-ui/master/examples/gatsby/src/withRoot.js) and [getPageContext.js](https://raw.githubusercontent.com/mui-org/material-ui/master/examples/gatsby/src/getPageContext.js) components. Install as follows:
 
 ```shell
 cd src
@@ -33,7 +33,7 @@ curl -O https://raw.githubusercontent.com/mui-org/material-ui/master/examples/ga
 curl -O https://raw.githubusercontent.com/mui-org/material-ui/master/examples/gatsby/src/getPageContext.js
 ```
 
-Check out the [Material UI project on GitHub](https://github.com/mui-org/material-ui), and the official home page at [https://material-ui.com/](https://material-ui.com/) for more information about the library and it's usage.
+Check out the [Material UI project on GitHub](https://github.com/mui-org/material-ui) and its official home page at [https://material-ui.com/](https://material-ui.com/) for more information about the library and its usage.
 
 ## Update the `Layout` component
 
@@ -109,11 +109,11 @@ Layout.propTypes = {
 export default withRoot(withStyles(styles)(Layout));
 ```
 
-This update uses the `withRoot`, and `withStyles` components to initialize the Material UI library. And establishes some very vanilla layout properties in `const styles`.
+This update uses the `withRoot` and `withStyles` components to initialize the Material UI library. It establishes some very vanilla layout properties in `const styles`.
 
 ## Add a `Navigation` component.
 
-Add the file *src/components/Navigation/Navigation.js*. We'll use this as the header, and navigation for our application:
+Add the file *src/components/Navigation/Navigation.js*. We'll use this as the header and navigation for our application:
 
 ```javascript
 import React from 'react';
@@ -164,9 +164,9 @@ Navigation.propTypes = {
 export default withStyles(styles)(Navigation);
 ```
 
-## Add some style the the home page
+## Add some style to the home page
 
-Update the homage, *src/pages/index.js* to use the `Paper`, and `Typography` components for a little extra style:
+Update the home page, *src/pages/index.js*, to use the `Paper` and `Typography` components for a little extra style:
 
 ```javascript
 import React from 'react'
@@ -215,7 +215,7 @@ export default withStyles(styles)(IndexPage);
 
 ## Recap
 
-In this tutorial we installed the @material-ui/core component library and then made use of some of the components it provides in order to give our application a Material UI like style. We'll use these components to provide UI for or application throughout the rest of this series of tutorials.
+In this tutorial we installed the @material-ui/core component library and then made use of some of the components it provides in order to give our application a "Material UI"-like style. We'll use these components to provide UI for our application throughout the rest of this series of tutorials.
 
 ## Further your understanding
 
@@ -225,5 +225,5 @@ In this tutorial we installed the @material-ui/core component library and then m
 
 ## Additional resources
 
-- [https://material-ui.com/](https://material-ui.com/)
+- [https://material-ui.com/](https://material-ui.com/) 
 - [https://github.com/mui-org/material-ui](https://github.com/mui-org/material-ui)
