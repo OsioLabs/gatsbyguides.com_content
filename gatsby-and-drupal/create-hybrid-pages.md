@@ -201,7 +201,7 @@ class Recipe extends React.Component {
       headers,
     };
 
-    const url = `http://gatsby-drupal.ddev.local/jsonapi/node/recipe/${this.props.uuid}`
+    const url = `http://gatsby-drupal.ddev.local/jsonapi/node/recipe/${this.props.drupal_id}`
     
     let data;
     try {
@@ -327,7 +327,7 @@ const recipeTemplate = (props) => {
   const { nodeRecipe: recipe } = props.data;
 
   const recipeClean = {
-    uuid: recipe.uuid,
+    drupal_id: recipe.drupal_id,
     title: recipe.title,
     difficulty: recipe.difficulty,
     cooking_time: recipe.cooking_time,
@@ -359,15 +359,15 @@ const recipeTemplate = (props) => {
 
 export default withStyles(styles)(recipeTemplate);
 
-// The $uuid variable here is obtained from the "context" object passed into
+// The $drupal_id variable here is obtained from the "context" object passed into
 // the createPage() API in gatsby-node.js.
 //
 // Also note the use of field name aliasing in the query. This is done to
 // help normalize the shape of the recipe data.
 export const query = graphql`
-  query RecipeTemplate($uuid: String!) {
-    nodeRecipe(uuid: {eq: $uuid}) {
-      uuid,
+  query RecipeTemplate($drupal_id: String!) {
+    nodeRecipe(drupal_id: {eq: $drupal_id}) {
+      drupal_id,
       title,
       cooking_time: field_cooking_time,
       difficulty: field_difficulty,

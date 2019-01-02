@@ -47,7 +47,7 @@ exports.createPages = ({ graphql, actions }) => {
         allNodeRecipe {
           edges {
             node {
-              uuid,
+              drupal_id,
               title,
               path {
                 alias,
@@ -60,7 +60,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allNodeRecipe.edges.forEach(({ node }) => {
         let path_alias;
         if (node.path.alias == null) {
-          path_alias = `recipe/${node.uuid}`;
+          path_alias = `recipe/${node.drupal_id}`;
         } else {
           path_alias = node.path.alias;
         }
@@ -74,7 +74,7 @@ exports.createPages = ({ graphql, actions }) => {
           context: {
             // Data passed to context is available in page queries as GraphQL
             // variables.
-            uuid: node.uuid,
+            drupal_id: node.drupal_id,
           },
         })
       });
@@ -90,8 +90,8 @@ This code:
 - Exports a new function named `createPages`. The name here is important, it's how Gatsby knows this function contains the code we want to execute during the page generation phase of the build process.
 - Gatsby passes an object into the function and we extract the `graphql` function and `actions` object from it. Then further destructure the `actions` object to get the `createPage` function we'll use later.
 - The function returns a `Promise`
-- First we execute a query against Gatsby's internal GraphQL database. In this case we only need to get a minimal amount of information. The list of recipes to generate, the path we want to use for accessing the recipe, and the UUID of the recipe.
-- Then we take loop over the results returned from the query and for each row we first figure out what path we want to the recipe to live at. In this case, if there's a custom path already set within Drupal we'll use it, and if not we'll use a generic one. Then for each row we call the `createPage` action and give it the path we want to use, the component to use when rendering the HTML for the path, and some additional contextual information we want made available to the template component. In this case the recipe UUID so we can use that to query for the complete recipe at build time.
+- First we execute a query against Gatsby's internal GraphQL database. In this case we only need to get a minimal amount of information. The list of recipes to generate, the path we want to use for accessing the recipe, and the drupal_id of the recipe.
+- Then we take loop over the results returned from the query and for each row we first figure out what path we want to the recipe to live at. In this case, if there's a custom path already set within Drupal we'll use it, and if not we'll use a generic one. Then for each row we call the `createPage` action and give it the path we want to use, the component to use when rendering the HTML for the path, and some additional contextual information we want made available to the template component. In this case the recipe drupal_id so we can use that to query for the complete recipe at build time.
 
 ## Define a recipe template
 
@@ -145,15 +145,15 @@ const recipeTemplate = (props) => {
 
 export default withStyles(styles)(recipeTemplate);
 
-// The $uuid variable here is obtained from the "context" object passed into
+// The $drupal_id variable here is obtained from the "context" object passed into
 // the createPage() API in gatsby-node.js.
 //
 // Also note the use of field name aliasing in the query. This is done to
 // help normalize the shape of the recipe data.
 export const query = graphql`
-  query RecipeTemplate($uuid: String!) {
-    nodeRecipe(uuid: {eq: $uuid}) {
-      uuid,
+  query RecipeTemplate($drupal_id: String!) {
+    nodeRecipe(drupal_id: {eq: $drupal_id}) {
+      drupal_id,
       title,
       cooking_time: field_cooking_time,
       difficulty: field_difficulty,
@@ -182,7 +182,7 @@ export const query = graphql`
 The code in this file does two important things:
 
 1. It exports a React component, `recipeTemplate`, that provides a wrapper for the page content using a layout component, and then delegates to the `Recipe` component to render the content of the individual recipe.
-2. Exports a variable named `query` wrapped with the `graphql` tag function which contains a GraphQL query that at build time is run to gather data for the individual recipe being displayed. Note the `$uuid` variable in `RecipeTemplate($uuid: String!)`. That comes from the `{context: uuid: 'xxx'}` that was passed to the `createPage` action in our implementation of the `createPages` API. This is how we know which recipe we're currently generating HTML for. When the GraphQL query completes the data it returns is injected into the `recipeTemplate` component as `props.data.*`.
+2. Exports a variable named `query` wrapped with the `graphql` tag function which contains a GraphQL query that at build time is run to gather data for the individual recipe being displayed. Note the `$drupal_id` variable in `RecipeTemplate($drupal_id: String!)`. That comes from the `{context: drupal_id: 'xxx'}` that was passed to the `createPage` action in our implementation of the `createPages` API. This is how we know which recipe we're currently generating HTML for. When the GraphQL query completes the data it returns is injected into the `recipeTemplate` component as `props.data.*`.
 
 Here's the complete Recipe component, *src/components/Recipe/Recipe.js*:
 

@@ -116,7 +116,7 @@ Here's an example query you can try:
   allNodeRecipe {
     edges {
       node {
-        uuid,
+        drupal_id,
         title,
         created,
         path {
@@ -134,6 +134,10 @@ Here's an example query you can try:
   }
 }
 ```
+
+## UUID vs drupal_id
+
+In order to maintain compatibility with Drupal's JSON API module at both versions 1.x, and 2.x+, you should use the `drupal_uid` field as the unique identifier for an entity whenever you're working with content from Drupal. This ensures that the ID being used within Gatsby is also the same as the one being used by Drupal. This is necessary due to how the `UUID` field output by Drupal is handled in JSON API v1 vs v2+.
 
 ## Drupal entity reference fields
 
