@@ -1,15 +1,15 @@
-# Create Client Only Routes
+# Create Client-Only Routes
 
 [# summary #]
-For some pages none of the page needs to be server rendered as all data will be loaded live from your API after the user logs in. For example, a user account page that displays a user's personal profile and data. It's only accessible to the user, and the content is completely dynamic. Another example is the checkout funnel of an e-commerce application, the contents of your cart, and all of the payment related pages are completely dynamic and unique for each use.
+For some pages, none of the page needs to be server rendered, as all data will be loaded live from your API after the user logs in. For example, a user account page that displays a user's personal profile and data. It's only accessible to the user, and the content is completely dynamic. Another example is the checkout funnel of an e-commerce application; the contents of your cart and all of the payment-related pages are completely dynamic and unique for each use.
 
 In this tutorial we'll:
 
-- Talk about the use-case for client only routes
-- Use Gatsby's `createPage` API to register client only routes at build time
-- Write some React components to handle routing and rendering content for client only routes
+- Talk about the use-case for client-only routes
+- Use Gatsby's `createPage` API to register client-only routes at build time
+- Write some React components to handle routing and rendering content for client-only routes
 
-By the end of this tutorial you should know how to register one or more client only routes in your Gatsby application, and then populate them with content on the client-side when a user access that route.
+By the end of this tutorial you should know how to register one or more client-only routes in your Gatsby application, and then populate them with content on the client-side when a user accesses that route.
 [# endsummary #]
 
 ## Goal
@@ -23,18 +23,18 @@ Create a user profile page that displays a user's personal information.
 
 In order to create client-only routes in Gatsby we need to:
 
-- Add a new page, or pages, in *src/pages/* that will be responsible for handling any routes marked as client only.
-- Use the `createPage` API in *gatsby-node.js* to declare which routes should be considered client only.
-- In our example, which deals with private routes we need to define a new `PrivateRoute` component that we can use to make routes only accessible to authenticated users. This part isn't required if you're dealing with public routes.
-- Define components that will render the content of these routes in the client
+- Add a new page, or pages, in *src/pages/* that will be responsible for handling any routes marked as client-only.
+- Use the `createPage` API in *gatsby-node.js* to declare which routes should be considered client-only.
+- In our example, which deals with private routes, we need to define a new `PrivateRoute` component that we can use to make routes only accessible to authenticated users. This part isn't required if you're dealing with public routes.
+- Define components that will render the content of these routes in the client.
 
 ## Reach router
 
-Under the hood Gatsby uses [@reach/router](https://reach.tech/router/) to handle routing within your application. Which means you can write code just like you would with any application using @react/router for application routing.
+Under the hood, Gatsby uses [@reach/router](https://reach.tech/router/) to handle routing within your application. So, you can write code just like you would with any application using @react/router for application routing.
 
 ## Define your routes
 
-Start by creating a new Gatsby page at *src/pages/user.js*. Gatsby treats any file in *src/pages/* as representative of a page, and creates a route that corresponds with the file name. In this case *user.js* maps to *localhost:8000/user*. Instead of defining a component that renders HTML though, we'll instead use the Router component to from [@reach/router](https://reach.tech/router) to delegate to another component depending on the route being used.
+Start by creating a new Gatsby page at *src/pages/user.js*. Gatsby treats any file in *src/pages/* as representative of a page, and creates a route that corresponds with the file name. In this case *user.js* maps to *localhost:8000/user*. Instead of defining a component that renders HTML, we'll use the Router component from [@reach/router](https://reach.tech/router) to delegate to another component depending on the route being used.
 
 Example *src/pages/user.js*:
 
@@ -56,9 +56,9 @@ const User = () => (
 export default User;
 ```
 
-This code will render a page using the standard `Layout` component. The content of the page will depend on the exact route used, and the component it maps to. In this example we're mapping the path */user/profile* to the component `Profile`.
+This code will render a page using the standard `Layout` component. The content of the page will depend on the exact route used and the component it maps to. In this example we're mapping the path */user/profile* to the component `Profile`.
 
-This uses two new components, `PrivateRoute`, and `Profile` which haven't been defined just yet.
+This uses two new components, `PrivateRoute`, and `Profile` which we'll define next.
 
 ## Define a `PrivateRoute` component
 
@@ -87,7 +87,7 @@ PrivateRoute.propTypes = {
 export default withDrupalOauthConsumer(PrivateRoute);
 ```
 
-This code uses the `withDrupalOauthConsumer` higher-order component to determine if the current user is logged in or not. And then conditionally renders the content of the route depending on that. If the user is authenticated render whatever component was passed in in `props.component`, if not redirect them to the front page.
+This code uses the `withDrupalOauthConsumer` higher-order component to determine if the current user is logged in or not. Then it conditionally renders the content of the route. If the user is authenticated, render whatever component was passed in in `props.component`; if not, redirect them to the front page.
 
 ## Define a `Profile` component
 
@@ -179,8 +179,8 @@ This code:
 
 - Initially renders a progress bar
 - Uses `withDrupalOauthConsumer` to gain access to the `drupalOauthClient` library.
-- Retrieves information about the current user from Drupal by using the OAuth authorization token managed by `drupalOauthClient` to make authorized requests to Drupal. First one that figures out the ID of the current user based on the token used. And then another which retrieves information about the user based on their ID.
-- Finally, the components state is updated with the returned data. This causes it to re-render and the content is displayed in an unordered list.
+- Retrieves information about the current user from Drupal by using the OAuth authorization token managed by `drupalOauthClient` to make authorized requests to Drupal. First, one that figures out the ID of the current user based on the token used. Then, another which retrieves information about the user based on their ID.
+- Finally, the component's state is updated with the returned data. This causes it to re-render and the content is displayed in an unordered list.
 
 ## Add a link to the user's profile
 
@@ -203,7 +203,7 @@ This adds a new `Button` element linked to the */user/profile* route we just cre
 
 ## Make it client-only
 
-Finally, we need to tell Gatsby the this route, /user, is a client-only route. And that is should render the application container, but doesn't need to worry about generating a static HTML asset to represent this route. This is done via the `onCreatePages` API.
+Finally, we need to tell Gatsby that this route, /user, is a client-only route. Also, that it should render the application container, but doesn't need to worry about generating a static HTML asset to represent this route. This is done via the `onCreatePages` API.
 
 Add the following to *gatsby-node.js*:
 
@@ -225,31 +225,31 @@ exports.onCreatePage = async ({ page, actions }) => {
 }
 ```
 
-This implements the `onCreatePages` API. Looks for any page whose route which matches the regular expression `/^\/user/`. So basically *user/*. And then uses the `matchPath` flag to indicate to Gatsby that this route is client only and calls `createPage` again with the updated values. `page.matchPath` tells the system that anything matching should be ignored when resolving routes during static builds, but once the application is loaded into the client should be resolved by @reach/router on the client.
+This implements the `onCreatePages` API. It looks for any page whose route matches the regular expression `/^\/user/` -- basically *user/*. Then it uses the `matchPath` flag to indicate to Gatsby that this route is client-only and calls `createPage` again with the updated values. `page.matchPath` tells the system that anything matching should be ignored when resolving routes during static builds, but once the application is loaded into the client, it should be resolved by @reach/router on the client.
 
 ## Restart Gatsby
 
 We added a new page in *src/pages/user.js*, and in order for Gatsby to register it we need to restart the application.
 
-You should now see a *My account* button in the navigation when you're signed in. Clicking on it should take you to a page that displays information about your user account pulled directly from Drupal.
+You should now see a *My account* button in the navigation when you're signed in. Clicking on it should take you to a page that displays information about your user account, pulled directly from Drupal.
 
 ## Recap
 
-In this tutorial we added a client-only route to our Gatsby application. One that will have no static HTML assets generated for it, and will only ever be rendered client-side. This is accomplished by using the `onCreatePages` API to designate routes a client-only so that Gatsby skips them during static page generation. And then making use of the @reach/router routing library to handle access control and routing for the client-side only routes.
+In this tutorial we added a client-only route to our Gatsby application. It will have no static HTML assets generated for it, and will only ever be rendered client-side. This is accomplished by using the `onCreatePages` API to designate routes as client-only so that Gatsby skips them during static page generation. Then we made use of the @reach/router routing library to handle access control and routing for the client-side only routes.
 
-In our example we created a `PrivateRoute` component that checks a users authentication state and either renders a component or redirects the user based on that. Then we added a `Profile` component that can query the Drupal API for information about the current user and display it.
+In our example we created a `PrivateRoute` component that checks a user's authentication state and either renders a component or redirects the user based on that. Then we added a `Profile` component that can query the Drupal API for information about the current user and display it.
 
 Routes created with this approach will exist on the client only and will not correspond to index.html files in an app’s built assets. If you’d like site users to be able to visit client routes directly, you’ll need to set up your server to handle those routes appropriately.
 
 ## Further your understanding
 
-- Can you add an additional client-only route? Something like *user/login*. That when accessed displays a login form and make it only display for non-authenticated users?
-- Take some time to explore the [@reach/router documentation](https://reach.tech/router) and examples
-- You can also use the plugin [gatsby-plugin-create-client-paths](https://www.gatsbyjs.org/packages/gatsby-plugin-create-client-paths/) to declare client only routes. This allows you to define patterns in your *gatsby-config.js* file instead of adding code in the *gatsby-node.js* file.
+- Can you add an additional client-only route? Something like *user/login*. When accessed, it should display a login form. Can you make it only display for non-authenticated users?
+- Take some time to explore the [@reach/router documentation](https://reach.tech/router) and examples.
+- You can also use the plugin [gatsby-plugin-create-client-paths](https://www.gatsbyjs.org/packages/gatsby-plugin-create-client-paths/) to declare client-only routes. This allows you to define patterns in your *gatsby-config.js* file instead of adding code in the *gatsby-node.js* file.
 
 ## Additional resources
 
-- [Filtering with JSON API](https://drupalize.me/tutorial/json-api-filtering-collections?p=3003)
-- [@reach/router](https://reach.tech/router)
-- [https://www.gatsbyjs.org/docs/node-apis/#onCreatePage](https://www.gatsbyjs.org/docs/node-apis/#onCreatePage)
-- [https://www.gatsbyjs.org/docs/behind-the-scenes-terminology/#matchpath](https://www.gatsbyjs.org/docs/behind-the-scenes-terminology/#matchpath)
+- [Filtering with JSON API](https://drupalize.me/tutorial/json-api-filtering-collections?p=3003) (Drupalize.me)
+- [@reach/router](https://reach.tech/router) (reach.tech)
+- [onCreatePage documentation](https://www.gatsbyjs.org/docs/node-apis/#onCreatePage) (gatsbyjs.org)
+- [matchPath documentation](https://www.gatsbyjs.org/docs/behind-the-scenes-terminology/#matchpath) (gatsbyjs.org)
