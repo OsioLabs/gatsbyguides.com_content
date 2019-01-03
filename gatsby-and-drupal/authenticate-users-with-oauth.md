@@ -11,12 +11,12 @@ In this tutorial we'll:
 - Integrate some existing React components that manage OAuth authentication via Drupal into our application
 - Verify it's working by showing/hiding a component depending on the current user's authentication state
 
-By the end of this tutorial you'll have a better understanding of how to integrate authentication into a Gatsby application, and specifically how to authenticate users's against a Drupal OAuth provider.
+By the end of this tutorial you'll have a better understanding of how to integrate authentication into a Gatsby application, and specifically how to authenticate users against a Drupal OAuth provider.
 [# endsummary #]
 
 ## Goal
 
-Define `SignIn`, and `LogOutLink` components that we can use to allow users of our application to authenticate their account which is stored in Drupal.
+Define `SignIn` and `LogOutLink` components to allow users of our application to authenticate their account which is stored in Drupal.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ OAuth 2 will authenticate a request if that request carries a header containing 
 There are many ways to ask Drupal to generate a token, in accordance with the OAuth 2 specification. In all cases the sequence is:
 
 1. A user provides their username and password to prove that they are who they claim to be.
-2. The OAuth provider generates a secret random token and stores it in the database associated to that user ID. Tokens are stamped with an expiration date, after which the token is useless.
+2. The OAuth provider generates a secret random token and stores it in the database associated with that user ID. Tokens are stamped with an expiration date, after which the token is useless.
 3. The provider returns the token to the consumer. The consumer stores that token.
 4. The consumer makes as many requests as it needs to as an authenticated user by providing the token every time.
 
@@ -48,14 +48,14 @@ Here's what's in it:
 
 - *drupalOauth.js*: Contains the `drupalOauth` class. A utility library for dealing with the low-level elements of the OAuth flow including exchanging a username and password for an authorization token, storing the token in local storage, refreshing an expired token, checking a user's current authentication state, and retrieving a token for use in authenticating other `fetch` requests.
 - *DrupalOauthContext.js*: Define a new React context component that will manage an instance of `drupalOauth` and make it available to any component that needs it.
-- *withDrupalOauthConsumer.js*: Provides the `widthDrupalOauthConsumer` higher-order component for use when another component needs to gain access to DrupalOauthContext data. Adds userAuthenticated, drupalOauthClient, and updateAuthenticatedUserState props to wrapped components.
-- *withDrupalOauthProvider.js*: Provides the `withDrupalOauthProvider` higher-order compoment. Assists in initializing a DrupalOauthContext provider.
+- *withDrupalOauthConsumer.js*: Provides the `widthDrupalOauthConsumer` higher-order component for use when another component needs to gain access to DrupalOauthContext data. Adds `userAuthenticated`, `drupalOauthClient`, and `updateAuthenticatedUserState` props to wrapped components.
+- *withDrupalOauthProvider.js*: Provides the `withDrupalOauthProvider` higher-order component. Assists in initializing a DrupalOauthContext provider.
 
 Place all of these files in the *src/components/drupal-oauth/* directory in your application.
 
 ## Initialize an OAuth context provider
 
-We'll use the React context API to keep track of the current user's authentication state. Which will allow us to wrap any component in our application using `withDrupalOAuthConsumer`, and quickly check via the `props.userAuthenticated` parameter wether the current user is authenticated or not. And then vary what the component renders as necessary.
+We'll use the React context API to keep track of the current user's authentication state. That will allow us to wrap any component in our application using `withDrupalOAuthConsumer`, and quickly check via the `props.userAuthenticated` parameter whether the current user is authenticated or not. The authentication state varies what the component renders as necessary.
 
 In order to do this we need to initialize the context provider. In *src/components/layout.js* we need to add the following code:
 
@@ -81,13 +81,13 @@ There's a bit of extra code here handling integration with the Material UI libra
 
 - Importing the `drupalOauth` class and `withDrupalOauthProvider` component
 - Initializing a new instance of the `drupalOauth` class and providing the necessary information to connect to our Drupal Oauth server. We configured this in [Install and Configure Drupal](/content/gatsby-and-drupal/install-and-configure-drupal.md). This instance of the `drupalOauth` client will be injected into the React DrupalOauthContext so that components consuming that context will have access to the utility class and the methods it provides. This makes it easier for components to use the utility class without also having to initialize it first, and for maintenance purposes allows us to just configure the client once.
-- Finally, we wrap the primary component using `withDrupalOauthProvider`, which takes two arguments; An instance of `drupalOuath` and the component to wrap.
+- Finally, we wrap the primary component using `withDrupalOauthProvider`, which takes two arguments: an instance of `drupalOuath` and the component to wrap.
 
 ## Define a `SignIn` component
 
-Next, we'll need a way to let users provide their username and password, and then use those to authenticate the user. To do this we define a new `SignIn` component which display a form. When the form is submitted we attempt to authenticate the user and update the applications state accordingly.
+Next, we'll need a way to let users provide their username and password, and then use those to authenticate the user. To do this we define a new `SignIn` component which display a form. When the form is submitted we attempt to authenticate the user and update the application's state accordingly.
 
-This component will render a button, which when clicked will display a modal dialog containing a log in form. Example:
+This component will render a button, which when clicked will display a modal dialog containing a log-in form. Example:
 
 ![](/content/gatsby-and-drupal/images/signin-component-example.png)
 
@@ -196,8 +196,8 @@ export default withDrupalOauthConsumer(SignIn);
 
 This code follows a [fairly standard pattern](https://reactjs.org/docs/forms.html) for defining a form component, and uses components from the Material UI library for styling. The most interesting parts here are:
 
-- The entire component is wrapped with `withDrupalOauthConsumer` which gives us `this.props.drupalOauthClient` , and `this.props.updateAuthenticatedUserState` from the DrupalOauthContext provider we initialized in *layout.js*.
-- In the `handleSubmit()` method we use `this.props.drupalOauthClient.handleLogin(username, password, scope)` which handles the heavy lifting required to make a request to the Drupal OAuth server attempting to exchange a username and password for an authorization token. If that request succeeds it stores the token in local storage for later use. We then call `this.props.updateAuthenticatedUserState(true)` which updates the state variable in the DrupalOauthContext provider. That update will bubble out to any other component using the context provider and trigger a re-render in those components so our application will update almost instantly to reflect that a user is now logged in.
+- The entire component is wrapped with `withDrupalOauthConsumer` which gives us `this.props.drupalOauthClient`, and `this.props.updateAuthenticatedUserState` from the DrupalOauthContext provider we initialized in *layout.js*.
+- In the `handleSubmit()` method we use `this.props.drupalOauthClient.handleLogin(username, password, scope)` which handles the heavy lifting required to make a request to the Drupal OAuth server attempting to exchange a username and password for an authorization token. If that request succeeds, it stores the token in local storage for later use. We then call `this.props.updateAuthenticatedUserState(true)` which updates the state variable in the DrupalOauthContext provider. That update will bubble out to any other component using the context provider and trigger a re-render in those components, so our application will update almost instantly to reflect that a user is now logged in.
 
 ## Define a logout link
 
@@ -235,11 +235,11 @@ export default withDrupalOauthConsumer(LogoutLink);
 This code does the following:
 
 - Similar to the `SignIn` component, we use `withDrupalOauthConsumer` to gain access to the `handleLogout()` and `updateAuthenticatedUserState()` functions we need to do the heavy lifting.
-- When a user clicks the button, we first call `props.drupalOauthClient.handleLogout()` which deletes the authorization token in local storage, effectively logging them out. And then call `props.updateAuthenticatedUserState(false)` which updates the application state to reflect the change.
+- When a user clicks the button, we first call `props.drupalOauthClient.handleLogout()` which deletes the authorization token in local storage, effectively logging them out. Then we call `props.updateAuthenticatedUserState(false)` which updates the application state to reflect the change.
 
 ## Update the navigation
 
-With these two components defined, we can update the `Navigation` component. The objective is to render the `SignIn` component for users who are not currently authenticated. And the `LogoutLink` component for those who are.
+With these two components defined, we can update the `Navigation` component. The objective is to render the `SignIn` component for users who are not currently authenticated, and the `LogoutLink` component for those who are.
 
 In *src/components/Navigation/Navigation.js* import the components we need:
 
@@ -267,17 +267,17 @@ Finally, update the `Navigation` component so that it checks to see if the user 
 }
 ```
 
-This pattern can be used anytime you want to conditionally display something depending on wether the current user is authenticated or not.
+This pattern can be used any time you want to conditionally display something depending on whether the current user is authenticated or not.
 
 - Import the require components
 - Wrap the component you want to update with the `widthDrupalOauthConsumer` HOC
 - Use the value of `props.userAuthenticated` to determine what to render
 
-Try it out! You should be able to login now using any Drupal user's username and password. When you log in you should be able to see the authorization token stored in local storage. And the application should update so that the navigation displays a log out link.
+Try it out! You should be able to login now using any Drupal user's username and password. When you log in you should be able to see the authorization token stored in local storage. The application should update so that the navigation displays a log-out link.
 
 ## Recap
 
-In this tutorial we added the ability for users to log in, and out, of our application. We started with some generic code for performing the OAuth handshake between React and Drupal in a React friendly way. Then, we defined two new components; `SignIn`, and `LogoutLink` which make use of that code to add a sign in form and log out link to our application. Finally, we updated the `Navigation` component so that it will display either a `SignIn` or a `LogoutLink` depending on the current users authentication state. 
+In this tutorial we added the ability for users to log in, and out, of our application. We started with some generic code for performing the OAuth handshake between React and Drupal in a React-friendly way. Then, we defined two new components: `SignIn` and `LogoutLink`, which make use of that code to add a sign-in form and log-out link to our application. Finally, we updated the `Navigation` component so that it will display either a `SignIn` or a `LogoutLink` depending on the current user's authentication state. 
 
 ## Further your understanding
 
