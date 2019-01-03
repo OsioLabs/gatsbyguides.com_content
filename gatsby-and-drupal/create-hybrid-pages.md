@@ -5,10 +5,10 @@ One method for creating dynamic pages with Gatsby is to create pages that are mo
 
 In this tutorial we'll:
 
-- Update our Drupal applications configuration to restrict access to some recipe data to authenticated users only
-- Modify our Gatsby application so that anonymous users see a teaser of each recipe, while authenticated users get full access all of the recipes details
+- Update our Drupal application's configuration to restrict access to some recipe data to authenticated users only
+- Modify our Gatsby application so that anonymous users see a teaser of each recipe, while authenticated users get full access to all of the recipes' details
 
-By the end of this tutorial you should know how to build pages that protect access to some content, as well has have a better understanding of the hybrid pages approach to building dynamic content pages in Gatsby.
+By the end of this tutorial you should know how to build pages that protect access to some content, as well as have a better understanding of the hybrid pages approach to building dynamic content pages in Gatsby.
 [# endsummary #]
 
 ## Goal
@@ -22,12 +22,12 @@ Modify our application so that recipe pages require a user to sign in before the
 
 ## What we're building
 
-In this example we're going to update our application so that a user must sign in before they can view a complete recipe. Non-authenticated users will get a preview of the recipe (statically rendered), but not be able view the complete recipe.
+In this example we're going to update our application so that a user must sign in before they can view a complete recipe. Non-authenticated users will get a preview of the recipe (statically rendered), but not be able to view the complete recipe.
 
 This requires:
 
 - Creating a new `RecipeTeaser` component to use for non-authenticated users
-- Updating configuration in Drupal so that the ingredients and instructions fields are protected and require authentication to view. This will make them no-longer publicly accessible via the API, and users will have to authenticate first before they can access that content. Gatsby will always run it's build process as an anonymous user, and thus the protected fields will not be available in Gatsby's GraphQL database.
+- Updating configuration in Drupal so that the ingredients and instructions fields are protected and require authentication to view. This will make them no longer publicly accessible via the API; users will have to authenticate first before they can access that content. Gatsby will always run its build process as an anonymous user, and thus the protected fields will not be available in Gatsby's GraphQL database.
 - Updating the `Recipe` component to make an authenticated `fetch()` request directly to the Drupal API in order to access protected content, and then display it
 - Updating the *src/templates/recipe.js* template so that it it displays the `RecipeTeaser` component for non-authenticated users, and the `Recipe` component for authenticated users
 
@@ -43,21 +43,21 @@ Install the [Field Permissions module](https://www.drupal.org/project/field_perm
 composer require drupal/field_permissions
 ```
 
-And then enable it via the Drupal UI.
+Then enable it via the Drupal UI.
 
-Once it's enabled in the *Manage* administration menu navigate to *Structure* > *Content types* > *Recipe* > *Manage fields* then edit both the *Ingredients* and *Recipe instructions* fields.
+Once it's enabled in the *Manage* administration menu, navigate to *Structure* > *Content types* > *Recipe* > *Manage fields* and edit both the *Ingredients* and *Recipe instructions* fields.
 
-For each field, in the new *Field visibility and permissions* section added by the field permissions module select *Custom permissions* and then give the *Authenticated User* role the "View anyone's value for field field_ingredients" permission. And give *Author* and *Editor* permission to create and edit values for the field. Then click *Save settings*.
+For each field, in the new *Field visibility and permissions* section added by the field permissions module, select *Custom permissions* and then give the *Authenticated User* role the "View anyone's value for field field_ingredients" permission. Give *Author* and *Editor* permission to create and edit values for the field. Then click *Save settings*.
 
 ![Screenshot of form showing field permissions configured for the recipe instructions field](/content/gatsby-and-drupal/images/field_permissions-example.png)
 
 This ensures that the content of these fields is only visible to authenticated users. So when someone queries the API for a recipe if they are an anonymous user these fields will not be in the returned object. However, if they authenticate with OAuth, and the API request contains the authorization token, the content will be present.
 
-It's also worth noting that Gatsby's source plugin will no longer see these fields as Gatsby acts as an anonymous user. So if you want to use the content in your application at any point you'll have to query the API for it directly. Which is of course exactly what we want in order to protect the content. If you have these fields in your GraphQL query in the recipe template you'll need to remove them or you'll get an error when trying to build your application.
+It's also worth noting that Gatsby's source plugin will no longer see these fields, since Gatsby acts as an anonymous user. So if you want to use the content in your application at any point, you'll have to query the API for it directly. This is exactly what we want in order to protect the content. If you have these fields in your GraphQL query in the recipe template you'll need to remove them, or you'll get an error when trying to build your application.
 
 ## Create a `RecipeTeaser` component
 
-The first thing we'll do is create a new `RecipeTeaser` component. This will display the portion of a recipe that is public, as well as a call to action for user's to sign in to view the rest of the recipe. Once updated, Gatsby will use this component when rendering the static HTML version of this hybrid page.
+Next we'll create a new `RecipeTeaser` component. This will display the portion of a recipe that is public, as well as a call to action for users to sign in to view the rest of the recipe. Once updated, Gatsby will use this component when rendering the static HTML version of this hybrid page.
 
 Example:
 
@@ -149,11 +149,11 @@ RecipeTeaser.propTypes = {
 export default withStyles(styles)(RecipeTeaser);
 ```
 
-This is basically just a copy of the code from *src/components/Recipe/Recipe.js*. And will be used to render the static, non-authenticated user, view of a recipe. The biggest difference is the addition of a call-to-action to log in to view the complete recipe.
+This is basically just a copy of the code from *src/components/Recipe/Recipe.js*. It will be used to render the static, non-authenticated user view of a recipe. The biggest difference is the addition of a call-to-action to log in to view the complete recipe.
 
 ## Update the existing `Recipe` component
 
-Use `withDurpalOauthConsumer` higher-order component to gain access to the `drupalOauth` class. Then in an implementation of the `componentDidMount` lifecycle method, use `fetch()` to make an authenticated request to the Drupal API for the recipe in question. The result will contain the protected fields, which we can display for authenticated users.
+Use `withDurpalOauthConsumer` higher-order component to gain access to the `drupalOauth` class. Then, in an implementation of the `componentDidMount` lifecycle method, use `fetch()` to make an authenticated request to the Drupal API for the recipe in question. The result will contain the protected fields, which we can display for authenticated users.
 
 Here's the complete code for the updated *src/components/Recipe/Recipe.js* file:
 
@@ -293,8 +293,8 @@ export default withDrupalOauthConsumer(RecipeWithStyles);
 The biggest changes include:
 
 - Using `withDrupalOauthConsumer`
-- Adding the `async componentDidMount() {}` method. In which we use `const token = this.props.drupalOauthClient.isLoggedIn();` to get an OAuth token for the current user, and then add an `'Authorization': `${token.token_type} ${token.access_token}`` header to the `fetch()` request to get more information about the Recipe.
-- When the component initially renders we display a placeholder with a progress indicator to let the user know more content is loading. Then, when the `fetch()` request completes we use the data returned to update the ingredients and preparation instructions in the components state. This causes a re-render, and now we display the new content instead of the placeholder.
+- Adding the `async componentDidMount() {}` method. In which we use `const token = this.props.drupalOauthClient.isLoggedIn();` to get an OAuth token for the current user, and then add an `'Authorization': ${token.token_type} ${token.access_token}` header to the `fetch()` request to get more information about the Recipe.
+- When the component initially renders we display a placeholder with a progress indicator to let the user know more content is loading. Then, when the `fetch()` request completes, we use the data returned to update the ingredients and preparation instructions in the components state. This causes a re-render, and now we display the new content instead of the placeholder.
 
 ## Update the recipe template
 
@@ -400,27 +400,27 @@ export const query = graphql`
 
 In this updated code we:
 
-- Use `DrupalOauthContext.Consumer` to detect wether the current user is authenticated or not.
-- Depending on the result of that check we either display the `Recipe` component or the `RecipeTeaser` component. Because it's based on the userAuthenticated state variable in our context component whenever that state is updated it'll switch to the appropriate component here automatically.
+- Use `DrupalOauthContext.Consumer` to detect whether the current user is authenticated or not.
+- Depending on the result of that check we either display the `Recipe` component or the `RecipeTeaser` component. Because it's based on the userAuthenticated state variable in our context component, whenever that state is updated it'll switch to the appropriate component here automatically.
 
 ## Test it out
 
-In your application navigate to a recipe page. You should see the teaser version of the recipe provided by the `RecipeTeaser` component. Next, sign in as an authorized users. When the sign in process completes the page should update automatically and display the content of the `Recipe` component. Which, will request the protected data directly from the Drupal API and display it.
+In your application, navigate to a recipe page. You should see the teaser version of the recipe provided by the `RecipeTeaser` component. Next, sign in as an authorized user. When the sign-in process completes, the page should update automatically and display the content of the `Recipe` component, requesting the protected data directly from the Drupal API for display.
 
 ## Advantages of the hybrid page approach
 
-- For anon users we're display static pages. These remain super fast.
-- For authenticated users we display an initial static page super quickly, which contains most of the page data, then in the background load and populate the protected information. This gives the perception of pages loading quickly, and in many cases will give access to critical information before the API request has even completed.
+- For anon users we display static pages. These remain super fast.
+- For authenticated users we display an initial static page super quickly, which contains most of the page data, and then in the background load and populate the protected information. This gives the perception of pages loading quickly, and in many cases will give access to critical information before the API request has even completed.
 
 ## Recap
 
 In this tutorial we updated our Drupal application to restrict access to some of the fields on the Recipe content type. Then, we modified our Gatsby application so that we display a different component to users viewing a recipe depending on their authentication status. Finally, we updated the `Recipe` component to make use of the OAuth token for the current user to make an authenticated request directly to the Drupal API. This returns the recipe content, including the protected fields, and we can display them for the user.
 
-By doing this we've created a system where access to some of the content in our application is restricted to only users who have an account, and who are authorized to view that content.
+By doing this we've created a system where some of the content in our application is displayed only to users who have an account, and who are authorized to view that content.
 
 ## Further your understanding
 
-- Think about how a similar approach could be used, without authentication, to display a static list of recipes on the front-page that queries Drupal at runtime to ensure the list is up-to-date and reconciles it if needed.
+- Think about how a similar approach could be used, without authentication, to display a static list of recipes on the front page that queries Drupal at runtime to ensure the list is up-to-date and reconciles it if needed.
 - Can you think of other examples where you might want to render a majority of the page as static content and dynamically update certain portions at runtime?
 - Can you come up with examples of applications you use that do this already?
 
