@@ -277,9 +277,12 @@ In this tutorial we implemented Gatsby's `createPages` Node API to query the Gra
 
 ## Further your understanding
 
+- Try installing another Gatsby source plugin. [gatsby-source-filesystem](https://www.gatsbyjs.org/packages/gatsby-source-filesystem/) for example. Then use the content it pulls in to generate additional pages at build time.
+- Take a look at the output the Gatsby generates in the _public/_ directory to see the generated HTML and other assets.
+
 ## Additional resources
 
 - [Creating and Modifying Pages](https://www.gatsbyjs.org/docs/creating-and-modifying-pages/) (gatsbyjs.org)
-- `[createPages` documentation](https://www.gatsbyjs.org/docs/node-apis/#createPages) (gatsbyjs.org)
-- `[createPage` documentation](https://www.gatsbyjs.org/docs/actions/#createPage) (gatsbyjs.org)
+- [`createPages` documentation](https://www.gatsbyjs.org/docs/node-apis/#createPages) (gatsbyjs.org)
+- [`createPage` documentation](https://www.gatsbyjs.org/docs/actions/#createPage) (gatsbyjs.org)
 

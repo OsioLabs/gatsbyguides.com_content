@@ -425,3 +425,5 @@ By doing this we've created a system where some of the content in our applicatio
 - Can you come up with examples of applications you use that do this already?
 
 ## Additional resources
+
+- [Making a site with authentication](https://www.gatsbyjs.org/docs/authentication-tutorial) (gatsbyjs.org)
