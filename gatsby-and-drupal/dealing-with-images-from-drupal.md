@@ -10,7 +10,7 @@ In this tutorial we'll:
 - Update our `Recipe` component to display images using the blur-up pattern
 
 By the end of this tutorial you should know how to display images sourced from Drupal using the blur-up technique with Gatsby.
-[# summary #]
+[# endsummary #]
 
 ## Goal
 
@@ -18,7 +18,7 @@ Update the `Recipe` component to display images using the blur-up technique and 
 
 ## Prerequisites
 
-- [Dynamically Creating Pages](/content/gatsby-and-drupal/dynamically-creating.pages.md)
+- [Dynamically Creating Pages](/content/gatsby-and-drupal/dynamically-creating-pages.md)
 
 ## How this all works
 

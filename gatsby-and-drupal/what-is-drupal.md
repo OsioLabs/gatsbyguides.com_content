@@ -8,7 +8,7 @@ In this tutorial we will:
 - Learn about what Drupal is, and why it's a good choice as a CMS backend for your Gatbsy application
 
 By the end of this tutorial you should have a better understanding of what Drupal is, and what its use-cases are.
-[# summary #]
+[# endsummary #]
 
 ## Goal
 

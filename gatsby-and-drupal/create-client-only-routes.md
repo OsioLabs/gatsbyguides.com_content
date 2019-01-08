@@ -19,7 +19,7 @@ Create a user profile page that displays a user's personal information.
 ## Prerequisites
 
 - [Building Applications with Gatsby](/content/gatsby/building-applications-with-gatsby.md)
-- [Authenticate Users with OAuth](/content/gatsby-and-drupal/authenticate-uesrs-with-oauth.md)
+- [Authenticate Users with OAuth](/content/gatsby-and-drupal/authenticate-users-with-oauth.md)
 
 In order to create client-only routes in Gatsby we need to:
 

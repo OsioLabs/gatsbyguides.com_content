@@ -18,7 +18,7 @@ Modify our application so that recipe pages require a user to sign in before the
 ## Prerequisites
 
 - [Building Applications with Gatsby](/content/gatsby/building-applications-with-gatsby.md)
-- [Authenticate Users with OAuth](/content/gatsby-and-drupal/authenticate-uesrs-with-oauth.md)
+- [Authenticate Users with OAuth](/content/gatsby-and-drupal/authenticate-users-with-oauth.md)
 
 ## What we're building
 

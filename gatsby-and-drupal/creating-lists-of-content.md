@@ -295,7 +295,7 @@ In this code we:
 - Create a fairly generic `RecipeList` component that takes an array of recipes and displays them as an unordered list of links to internal pages using the Gatsby `<Link />` compnent
 - Create a `RecipeListWrapper` component, within which we use the `StaticQuery` component provided by Gatsby to query the GraphQL database for the data we want to display. The `StaticQuery` component takes `query` prop which uses the `graphql` tag function to supply a query that we would like the execute. It also uses a `render` function which takes a Component to render the results. The results of the query are passed as a props to the provided Component.
 
-Edit the `Recipe` component created in [Dynamically Creating Pages](/content/dynamically-creating-pages.md) and add the new `RecipeList` component to the bottom in order to display additional recipes for someone to read when they complete the one they are viewing.
+Edit the `Recipe` component created in [Dynamically Creating Pages](/content/gatsby-and-drupal/dynamically-creating-pages.md) and add the new `RecipeList` component to the bottom in order to display additional recipes for someone to read when they complete the one they are viewing.
 
 [Learn more about using the `StaticQuery` component](https://www.gatsbyjs.org/docs/static-query/) to colocate a component with its data.
 
