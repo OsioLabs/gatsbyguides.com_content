@@ -54,8 +54,9 @@ if [ -n "$CIRCLECI" ] ; then
   # Back to the working directory for the project.
   cd /root/project/content
 
-  # Don't prompt to add new hosts to known hosts file.
-  mkdir -p $HOME/.ssh && printf "\nStrictHostKeyChecking no" >> "$HOME/.ssh/config"
+  # Don't prompt to add new hosts to known hosts file. Add this to the top of
+  # the config file.
+  mkdir -p $HOME/.ssh && sed -i '1s/^/StrictHostKeyChecking no\n\n/' "$HOME/.ssh/config"
 
   # Log in via Terminus
   terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
