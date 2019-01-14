@@ -1,0 +1,24 @@
+version: 2
+jobs:  
+  import_tutorials_to_pantheon:
+    branches:
+      only:
+        - master
+    docker:
+      - image: quay.io/pantheon-public/build-tools-ci:1.x
+    environment:
+      TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+      TERM: dumb
+
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            # Make this the ID of the key you added to CircleCI for this job.
+            # Note, this won't work when running circleci locally, and thus
+            # this build will fail because the next step(s) require a proper
+            # ssh key.
+            - "38:4c:da:dd:96:61:ee:1f:fa:fd:ec:33:22:e9:7d:0b"
+      - run:
+          name: run migration
+          command: ./scripts/tutorial-import
