@@ -1,0 +1,80 @@
+#!/bin/bash
+set -exo pipefail
+
+# Import the tutorial content in content/ to Lehub.
+#
+# Run this script from within the content/ directory of the projet if you're
+# running it manually.
+# e.g.
+# cd content/
+# ./../scripts/tutorial-import
+#
+# This can be run both locally, and by CircleCI.
+#
+# When running via CircleCI you need to set the TERMINUS_TOKEN, TERMINUS_SITE,
+# and TERMINUS_ENV environment variables in the CircleCI UI.
+#
+# The intent is to use this to update production tutorials whenever content is
+# updated in the master branch. But, in order to make testing things, and
+# workign with multi-dev environments easier, you can also run this manually
+# against any Pantheon environment.
+#
+# To run locall you'll need to set the following ENV variables:
+#TERMINUS_SITE='lehub'
+#TERMINUS_ENV='pr-74'
+
+if [ -z "$TERMINUS_SITE" ] ; then
+  echo "Requires TERMINUS_SITE be set to run"
+  exit 0;
+fi
+
+if [ -z "$TERMINUS_ENV" ] ; then
+  echo "Requires TERMINUS_ENV be set to run"
+  exit 0;
+fi
+
+# This is where we rsync the files on the Pantheon env so that we can import
+# them.
+#
+# NO trailing slash.
+REPOSITORY_DIR='files/private/_import_tutorials/gatsbyguides.com'
+
+TERMINUS_HIDE_UPDATE_MESSAGE=1
+
+echo "Begin build for $CIRCLE_BUILD_NUM. Pantheon environment is $TERMINUS_SITE.$TERMINUS_ENV"
+
+# NEEDS TO RUN ON CIRCLECI BUT NOT LOCALLY -------------------------------------
+if [ -n "$CIRCLECI" ] ; then
+  # This cleans up some issues with terminus-rsync and terminus by just making
+  # sure we have the latest dependencies for both.
+  cd /usr/local/share/terminus/vendor/pantheon-systems/terminus/
+  composer update
+  cd /usr/local/share/terminus-plugins/terminus-rsync-plugin
+  composer update
+  # Back to the working directory for the project.
+  cd /root/project/content
+
+  # Don't prompt to add new hosts to known hosts file.
+  mkdir -p $HOME/.ssh && echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
+
+  # Log in via Terminus
+  terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
+fi
+# ------------------------------------------------------------------------------
+
+# rsync files to Pantheon
+terminus remote:rsync ./ $TERMINUS_SITE.$TERMINUS_ENV:$REPOSITORY_DIR/content/ -- -rlvz --exclude=.git --ipv4 --size-only --progress -e
+
+# Ensure we can find the correct files to import by modifying the configuration
+# of the migrations used so that it points to the correct location.
+terminus remote:drush $TERMINUS_SITE.$TERMINUS_ENV -- config-set migrate_plus.migration.lehub_gatsbyguide_tutorial_content source.directory "sites/default/$REPOSITORY_DIR" --yes
+terminus remote:drush $TERMINUS_SITE.$TERMINUS_ENV -- config-set migrate_plus.migration.lehub_gatsbyguide_media_entities source.urls.0 "sites/default/$REPOSITORY_DIR/content" --yes
+terminus remote:drush $TERMINUS_SITE.$TERMINUS_ENV -- config-set migrate_plus.migration.lehub_gatsbyguide_tutorial_files source.urls.0 "sites/default/$REPOSITORY_DIR/content" --yes
+
+# run migrate-import
+terminus remote:drush $TERMINUS_SITE.$TERMINUS_ENV -- migrate-import lehub_gatsbyguide_tutorial_content --execute-dependencies --yes
+
+# clear the cache
+terminus remote:drush $TERMINUS_SITE.$TERMINUS_ENV -- cr --yes
+
+echo "SUCESS!"
