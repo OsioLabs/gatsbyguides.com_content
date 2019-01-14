@@ -63,7 +63,7 @@ fi
 # ------------------------------------------------------------------------------
 
 # rsync files to Pantheon
-terminus remote:rsync ./ $TERMINUS_SITE.$TERMINUS_ENV:$REPOSITORY_DIR/content/ -- -rlvz --exclude=.git --ipv4 --size-only --progress -e
+terminus remote:rsync ./ $TERMINUS_SITE.$TERMINUS_ENV:$REPOSITORY_DIR/content/ --yes -- -rlvz --exclude=.git --ipv4 --size-only --progress -e
 
 # Ensure we can find the correct files to import by modifying the configuration
 # of the migrations used so that it points to the correct location.
