@@ -89,7 +89,7 @@ Next, we'll need a way to let users provide their username and password, and the
 
 This component will render a button, which when clicked will display a modal dialog containing a log-in form. Example:
 
-![](/content/gatsby-and-drupal/images/signin-component-example.png)
+![Screenshot showing what the sign-in component looks like. A white modal window with a sign-in form overlaying the rest of the page.](/content/gatsby-and-drupal/images/signin-component-example.png)
 
 Add the file *src/components/SignIn/SignIn.js*:
 
