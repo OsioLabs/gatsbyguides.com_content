@@ -41,7 +41,7 @@ To add a list of content to the front page, or any page generated from a file in
 
 Here's an example of what we're going for:
 
-![](/content/gatsby-and-drupal/images/recipe-list-homepage.png)
+![List of recipes.](/content/gatsby-and-drupal/images/recipe-list-homepage.png)
 
 We'll start by defining a new `RecipeCard` component which we can use to display recipes on the front page. There's nothing special about this code; it just needs to exist so we can have a nice way of displaying the content.
 
@@ -218,7 +218,7 @@ Thus, each time the site is built using `gatsby build`, the content of home page
 
 Let's also create a new `RecipeList` component that displays a list of links to the 3 most recently added recipes that we can use anywhere in our application, not just when generating pages. For example, we might add a list like this to the bottom of each recipe page:
 
-![](/content/gatsby-and-drupal/images/recipelist-component-example.png)
+![Rendered recipe list component showing recipe title and details.](/content/gatsby-and-drupal/images/recipelist-component-example.png)
 
 To do this we need to:
 

@@ -127,10 +127,10 @@ Open-source grows with you as both you and your project change.
 
 ## Community
 
-![](https://reactfordrupal.com/static/drupal-community-2b9507a8e55471599ffb1825c3ace66c-9f69c.jpg) 
+![Members of the Drupal community.](https://reactfordrupal.com/static/drupal-community-2b9507a8e55471599ffb1825c3ace66c-9f69c.jpg) 
 Photos CC BY-NC-SA 2.0 by [Amazee Labs](https://www.flickr.com/photos/amazeelabs/).
 
-![](https://reactfordrupal.com/static/drupal-community-2b9507a8e55471599ffb1825c3ace66c-51f7f.jpg)
+![Members of the Drupal community.](https://reactfordrupal.com/static/drupal-community-2b9507a8e55471599ffb1825c3ace66c-51f7f.jpg)
 
 Drupal is one of the largest open source communities in the world, with over 1 million active participants who work together to improve the Drupal software, write documentation, handle security, host events, and more. The community primarily interacts online through Drupal.org and sub-sites like groups.drupal.org. In person, we connect at national, regional, and local events and meetups. Chances are there’s a Drupal meetup near you.
 
