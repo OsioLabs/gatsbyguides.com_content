@@ -42,7 +42,7 @@ There are many ways to ask Drupal to generate a token, in accordance with the OA
 
 ## Handling OAuth with React
 
-Our focus with this tutorial is on integrating OAuth into a Gatsby application, not on the specifics of handling the OAuth handshake. So we'll make use of some existing code which you can read through and explore on your own if you're curious. You can grab the code from [the example repository](https://github.com/LullabotEducation/gatsby-drupal-examples/tree/authenticate-users-with-oauth/src/components/drupal-oauth).
+Our focus with this tutorial is on integrating OAuth into a Gatsby application, not on the specifics of handling the OAuth handshake. So we'll make use of some existing code which you can read through and explore on your own if you're curious. You can grab the code from [the example repository](https://github.com/OsioLabs/gatsby-drupal-examples/tree/authenticate-users-with-oauth/src/components/drupal-oauth).
 
 Here's what's in it:
 

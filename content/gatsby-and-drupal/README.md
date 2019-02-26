@@ -16,4 +16,4 @@
 1. [Create Client Only Routes](/content/gatsby-and-drupal/create-client-only-routes.md)
 
 
-Example code for this series can be found in this repo - https://github.com/LullabotEducation/gatsby-drupal-examples
+Example code for this series can be found in this repo - https://github.com/OsioLabs/gatsby-drupal-examples
