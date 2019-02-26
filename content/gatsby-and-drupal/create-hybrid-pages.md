@@ -97,8 +97,8 @@ const styles = theme => ({
 const RecipeTeaser = (props) => (
   <>
     <Img fluid={props.image.localFile.childImageSharp.fluid} />
-    <Typography variant="headline" paragraph>{props.title}</Typography>
-    <GridList cols="5" cellHeight="auto">
+    <Typography variant="h2">{props.title}</Typography>
+    <GridList cols={5} cellHeight="auto">
       <ListItem>
       <ListItemText primary="Difficulty" secondary={props.difficulty} />
     </ListItem>
@@ -118,19 +118,19 @@ const RecipeTeaser = (props) => (
     }
     </GridList>
 
-    <Typography variant="subheading">Summary:</Typography>
+    <Typography variant="subtitle1">Summary:</Typography>
     <Typography variant="body2" paragraph dangerouslySetInnerHTML={{ __html: props.summary }} />
 
     <Card raised={true}>
       <CardContent>
-        <Typography variant="body" component="strong">
+        <Typography variant="body1" component="strong">
           <SignIn /> to view the complete content of this recipe.
         </Typography>  
       </CardContent>
     </Card>
 
     <div className={props.classes.recipeList}>
-      <Typography variant="subheading">Try another recipe:</Typography>
+      <Typography variant="subtitle1">Try another recipe:</Typography>
       <RecipeList />
     </div>
   </>
@@ -228,8 +228,8 @@ class Recipe extends React.Component {
     return (
       <>
         <Img fluid={this.props.image.localFile.childImageSharp.fluid} />
-        <Typography variant="headline" paragraph>{this.props.title}</Typography>
-        <GridList cols="5" cellHeight="auto">
+        <Typography variant="h2" paragraph>{this.props.title}</Typography>
+        <GridList cols={5} cellHeight="auto">
           <ListItem>
           <ListItemText primary="Difficulty" secondary={this.props.difficulty} />
         </ListItem>
@@ -249,26 +249,26 @@ class Recipe extends React.Component {
         }
         </GridList>
 
-        <Typography variant="subheading">Summary:</Typography>
+        <Typography variant="subtitle1">Summary:</Typography>
         <Typography variant="body2" paragraph dangerouslySetInnerHTML={{ __html: this.props.summary }} />
 
         {this.state.instructions !== '' ?
           <>
-            <Typography variant="subheading">Ingredients:</Typography>
+            <Typography variant="subtitle1">Ingredients:</Typography>
             <List dense={true}>
               {
                 this.state.ingredients.map(item => <ListItem key={item}>{item}</ListItem>)
               }
             </List>
 
-            <Typography variant="subheading">Preparation:</Typography>
+            <Typography variant="subtitle1">Preparation:</Typography>
             <Typography variant="body2" paragraph dangerouslySetInnerHTML={{ __html: this.state.instructions }} />
           </>
           :
           <LinearProgress className={classes.progressBar} />
         }
 
-        <Typography variant="subheading">Try another recipe:</Typography>
+        <Typography variant="subtitle1">Try another recipe:</Typography>
         <RecipeList/>
       </>
     )
@@ -401,7 +401,7 @@ export const query = graphql`
 In this updated code we:
 
 - Use `DrupalOauthContext.Consumer` to detect whether the current user is authenticated or not.
-- Depending on the result of that check we either display the `Recipe` component or the `RecipeTeaser` component. Because it's based on the userAuthenticated state variable in our context component, whenever that state is updated it'll switch to the appropriate component here automatically.
+- Depending on the result of that check we either display the `Recipe` component or the `RecipeTeaser` component. Because it's based on the `userAuthenticated` state variable in our context component, whenever that state is updated it'll switch to the appropriate component here automatically.
 
 ## Test it out
 

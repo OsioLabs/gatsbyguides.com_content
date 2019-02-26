@@ -197,12 +197,12 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-  // custom CSS here ...
+	// custom CSS here ...
 });
 
 const Recipe = (props) => (
   <>
-    <Typography variant="headline" paragraph>{props.title}</Typography>
+    <Typography variant="h2" paragraph>{props.title}</Typography>
     <GridList cols={5} cellHeight="auto">
       <ListItem>
       <ListItemText primary="Difficulty" secondary={props.difficulty} />
@@ -223,20 +223,19 @@ const Recipe = (props) => (
     }
     </GridList>
 
-    <Typography variant="subheading">Summary:</Typography>
-    <Typography variant="body2" paragraph dangerouslySetInnerHTML={{ __html: props.summary }} />
+    <Typography variant="subtitle1">Summary:</Typography>
+    <Typography variant="body1" paragraph dangerouslySetInnerHTML={{ __html: props.summary }} />
 
-    <Typography variant="subheading">Ingredients:</Typography>
+    <Typography variant="subtitle1">Ingredients:</Typography>
     <List dense={true}>
       {
         props.ingredients.map((item, index) => <ListItem key={index}>{item}</ListItem>)
       }
     </List>
 
-    <Typography variant="subheading">Preparation:</Typography>
-    <Typography variant="body2" paragraph dangerouslySetInnerHTML={{ __html: props.instructions }} />
+    <Typography variant="subtitle1">Preparation:</Typography>
+    <Typography variant="body1" paragraph dangerouslySetInnerHTML={{ __html: props.instructions }} />
 
-    <Typography variant="subheading">Try another recipe:</Typography>
   </>
 );
 
@@ -253,6 +252,7 @@ Recipe.propTypes = {
 };
 
 export default withStyles(styles)(Recipe);
+
 ```
 
 ## Generate some recipes
