@@ -252,7 +252,6 @@ Recipe.propTypes = {
 };
 
 export default withStyles(styles)(Recipe);
-
 ```
 
 ## Generate some recipes
