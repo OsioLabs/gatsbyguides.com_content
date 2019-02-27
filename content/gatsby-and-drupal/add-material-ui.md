@@ -147,9 +147,9 @@ function Navigation(props) {
     <div className={classes.root}>
       <AppBar position="relative" color="default">
         <Toolbar>
-          <Typography variant="headline" className={classes.grow}>{props.siteTitle}</Typography>
+          <Typography variant="h2" className={classes.grow}>{props.siteTitle}</Typography>
           <div className={classes.menu}>
-              <Button variant="default" component={Link} to="/" className={classes.menuButton}>Home</Button>
+              <Button component={Link} to="/" className={classes.menuButton}>Home</Button>
           </div>
         </Toolbar>
       </AppBar>
@@ -162,6 +162,7 @@ Navigation.propTypes = {
 };
 
 export default withStyles(styles)(Navigation);
+
 ```
 
 ## Add some style to the home page
@@ -193,11 +194,11 @@ const IndexPage = (props) => {
   return (
     <Layout>
       <Paper className={classes.root}>
-        <Typography variant="headline">Hi people</Typography>
-        <Typography variant="subheading" paragraph>
+        <Typography variant="h2">Hi people</Typography>
+        <Typography variant="subtitle1" paragraph>
           Welcome to your new Gatsby site using <a href="https://material-ui.com">Material UI</a> for the UI.
         </Typography>
-        <Typography variant="subheading" paragraph>
+        <Typography variant="subtitle1" paragraph>
           Now go build something great.
         </Typography>
         <Link to="/page-2/">Go to page 2</Link>

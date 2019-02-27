@@ -177,7 +177,7 @@ Then update the `Recipe` component to output an `Img` component by adding someth
   {props.image.localFile &&
     <Img fluid={props.image.localFile.childImageSharp.fluid} />
   }
-  <Typography variant="headline" paragraph>{props.title}</Typography>
+  <Typography variant="h2" paragraph>{props.title}</Typography>
   // ...
 ```
 
