@@ -104,7 +104,9 @@ Drupal itself is agnostic about what format you use to represent your data in an
 
 Through the core REST module Drupal supports a pure HTTP REST implementation, and data formats like JSON, and JSON-HAL. If you already know how Drupal’s internals work, or need full control over the CMS via the API this is a great option.
 
-When working with Gatsby and the `gatsby-source-drupal` plugin you can use the contributed  [JSON API](https://www.drupal.org/project/jsonapi) module, which outputs data in a format the Gatsby can intuitively understand and consume.
+When working with Gatsby and the `gatsby-source-drupal` plugin you can use the [JSON API](https://www.drupal.org/project/jsonapi) module included with Drupal core, which outputs data in a format the Gatsby can intuitively understand and consume.
+
+**Note:** If you're using a version of Drupal less than 8.7 you'll need to install the contributed [JSON API](https://www.drupal.org/project/jsonapi) module.
 
 Drupal also supports non-RESTful APIs like [GraphQL](https://www.drupal.org/project/graphql), which could also be especially appealing to Gatsby developers.
 

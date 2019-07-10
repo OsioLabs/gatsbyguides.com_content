@@ -1,12 +1,12 @@
 # Install and Configure Drupal
 
 [# summary #]
-If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access. Then install the JSON API module and make a couple of configuration changes.
+If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access. Then enable the core JSON API module, optionally install some contributed modules, and make a couple of configuration changes.
 
 In this tutorial we'll:
 
 - Install the latest version of Drupal 8
-- Install the contributed modules required to facilitate interaction with Gatsby
+- Install some optional contributed modules that help facilitate interaction with Gatsby
 - Make some configuration changes in Drupal to allow Gatsby to access data
 
 By the end of this tutorial you should have a working Drupal 8 site with some demo content that you can use as a backend data source for your Gatsby project. You should clearly understand what's required to get any Drupal site into a state that can work with Gatsby.
@@ -27,10 +27,9 @@ If you've already got an existing Drupal site and want to update it so that it c
 In order to use Drupal as a backend data source for Gatsby you need:
 
 1. Drupal 8 installed
-2. The contributed JSON API module enabled
-3. Permissions configured so that anonymous traffic can access the JSON API provided REST endpoints
-4. The contributed JSON API Extras and Simple OAuth modules enabled (optional, but recommended)
-5. Drupal configured to support CORS
+1. Permissions configured so that anonymous traffic can access the JSON API provided REST endpoints
+1. Drupal configured to support CORS
+1. Optionally, the contributed JSON API Extras and Simple OAuth modules enabled depending on your use case
 
 ## Install Drupal
 
@@ -47,18 +46,18 @@ php web/core/scripts/drupal quick-start demo_umami
 
 For a more in-depth look at what's required to get Drupal installed and running on a local development environment, check out [Chapter 3: Installation](https://drupalize.me/series/user-guide/installation-chapter) of the Drupal 8 User Guide.
 
-## Download and enable contributed modules
+## Download and enable modules
 
-In order to get Drupal and Gatsby to play well together we'll install the following contributed modules:
+In order to get Drupal and Gatsby to play well together we'll install the following modules:
 
-- [JSON API](https://www.drupal.org/project/jsonapi): This is the only one that's required for the integration to work. JSON API provides zero-configuration REST access to all the content in your Drupal site using the [{json:api}](https://jsonapi.org/) spec.
+- [JSON API](https://www.drupal.org/docs/8/modules/jsonapi): This is the only one that's required for the integration to work and it is included with Drupal core. JSON API provides zero-configuration REST access to all the content in your Drupal site using the [{json:api}](https://jsonapi.org/) spec.
 - [JSON API Extras](https://www.drupal.org/project/jsonapi_extras): Allows us to tweak the configuration of the JSON API module. We'll use this to disable resource endpoints that we don't need exposed.
 - [Simple OAuth](https://www.drupal.org/project/simple_oauth): We'll use this, and the included Simple OAuth Extras module, to turn Drupal into an OAuth 2 provider. Our Gatsby application can then use Drupal for user account storage, authentication, and authorization.
 
 The quickest way to download these all is using Composer. From the root of your Drupal project execute the following command:
 
 ```shell
-composer require drupal/jsonapi drupal/jsonapi_extras drupal/simple_oauth
+composer require drupal/jsonapi_extras drupal/simple_oauth
 ```
 
 Then in your Drupal site in the Manage administration menu navigate to *Extend*. Click the box to enable *JSON API*, *JSON API Extras*, *Simple OAuth*, and *Simple OAuth Extras*. Scroll to the bottom of the page and click *Install*. Once completed you should see a confirmation message indicating that the modules were successfully installed.
@@ -130,7 +129,7 @@ Finally, give authenticated users permission to *Grant OAuth 2 codes*. In the Ma
 
 ## Configure CORS
 
-If you're only using Drupal as a data source for Gatsby during the build phase this isn't required. However, if you plan to write code in your application that dynamically queries Drupal you'll need to set up [Cross Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). We'll do this in our example application when we talk about hybrid pages and client only routes. So go ahead and configure it now.
+If you're only using Drupal as a data source for Gatsby during the build phase this isn't required. However, if you plan to write code in your application that dynamically queries Drupal from the user's browser you'll need to set up [Cross Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). We'll do this in our example application when we talk about hybrid pages and client only routes. So go ahead and configure it now.
 
 Drupal 8 core provides support for CORS since 8.2, but it's turned off by default. To turn it on you will need to edit your *sites/default/services.yml* file. If you do not have one, you can create it by copying *sites/default/default.services.yml* and renaming it *sites/default/services.yml*.
 
