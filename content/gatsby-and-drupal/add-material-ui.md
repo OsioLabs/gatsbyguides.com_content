@@ -46,7 +46,7 @@ Check out the [Material UI project on GitHub](https://github.com/mui-org/materia
 
 ## Update the `Layout` component
 
-Update the default layout component to make use of the Material UI 'Container' and 'Box' components to provide some basic page layout.
+Update the default layout component to make use of the Material UI `Container` and `Box` components to provide some basic page layout.
 
 Update the `Layout` component in *src/components/layout.js* to match below:
 
