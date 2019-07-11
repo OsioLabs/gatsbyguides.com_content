@@ -176,7 +176,7 @@ export default Navigation;
 In the above code we:
 
 - Use the `AppBar`, `Button`, `Toolbar`, and `Typography` components from Material UI to output a navigation bar we can use on every page.
-- Then, we use the `makeStyles` function from `@material-ui/core/styles` to apply some additional tweaks to the `AppBar` component and it's children via the `className` prop. You can [read more about how this works](https://material-ui.com/styles/basics/).
+- Then, we use the `makeStyles` function from `@material-ui/core/styles` to apply some additional tweaks to the `AppBar` component and its children via the `className` prop. You can [read more about how this works](https://material-ui.com/styles/basics/).
 
 ## Add some style to the home page
 
