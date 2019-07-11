@@ -51,15 +51,14 @@ Code for *src/components/RecipeCard/RecipeCard.js*:
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby'
-
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
+const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
     minHeight: 310,
@@ -76,11 +75,11 @@ const styles = {
   pos: {
     marginBottom: 12,
   },
-};
+}));
 
 const RecipeCard = (props) => {
-  const { classes } = props;
-  const RecipeLink = props => console.log(props) || <Link to={props.path} {...props}>Read more</Link>;
+  const classes = useStyles();
+  const RecipeLink = props => <Link to={props.path} {...props}>Read more</Link>;
 
   return (
     <Card className={classes.card}>
@@ -88,13 +87,13 @@ const RecipeCard = (props) => {
         <Typography className={classes.title} color="textSecondary">
           {props.category}
         </Typography>
-        <Typography variant="headline" component="h2">
+        <Typography variant="h5" component="h2">
           {props.title}
         </Typography>
         <Typography className={classes.pos} color="textSecondary" dangerouslySetInnerHTML={{ __html: props.summary }} />
       </CardContent>
       <CardActions>
-        <Button size="small" path={props.path} component={RecipeLink} />
+        <Button size="small" path={props.path} component={RecipeLink}>Read more</Button>
       </CardActions>
     </Card>
   );
@@ -108,7 +107,7 @@ RecipeCard.propTypes = {
   path: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(RecipeCard);
+export default RecipeCard;
 ```
 
 The real work happens in the code in *src/pages/index.js*. This is the file that's generating the HTML for the `/` route.
@@ -119,42 +118,40 @@ Updated code for *src/pages/index.js*:
 import React from 'react'
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby'
-
-import Layout from '../components/layout'
-import RecipeCard from '../components/RecipeCard/RecipeCard';
-
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({
-  top: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
+import Layout from '../components/layout'
+import RecipeCard from '../components/RecipeCard/RecipeCard';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(3, 2),
   },
-});
+}));
 
 const IndexPage = (props) => {
-  const {classes} = props;
+  const classes = useStyles();
 
   return (
     <Layout>
-      <Paper className={classes.top}>
-        <Typography variant="headline">Hi people</Typography>
-        <Typography variant="subheading" paragraph>
+      <Paper className={classes.root}>
+        <Typography variant="h2">Hi people</Typography>
+        <Typography variant="subtitle1" paragraph>
           Welcome to your new Gatsby site using <a href="https://material-ui.com">Material UI</a> for the UI.
         </Typography>
-        <Typography variant="subheading" paragraph>
+        <Typography variant="subtitle1" paragraph>
           Now go build something great.
         </Typography>
       </Paper>
-        <Grid container spacing={40} className={classes.cardGrid}>
+      <Box mt={3}>
+        <Grid container spacing={1}>
         {
           props.data.allNodeRecipe.edges.map(({ node: recipe }) => (
-            <Grid item key={recipe.title} xs={12} md={4}>
+            <Grid item key={recipe.title} xs={6} md={4}>
               <RecipeCard
                 title={recipe.title}
                 summary={recipe.summary.processed}
@@ -165,8 +162,7 @@ const IndexPage = (props) => {
           ))
         }
         </Grid>
-
-
+      </Box>
     </Layout>
   );
 };
@@ -175,7 +171,7 @@ IndexPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IndexPage);
+export default IndexPage;
 
 // The result of this GraphQL query will be injected as props.data into the
 // IndexPage component.
@@ -232,11 +228,6 @@ Example *src/components/RecipeList/RecipeList.js*:
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, Link, graphql } from "gatsby"
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = theme => ({
-
-});
 
 const RecipeListWrapper = () => (
   <StaticQuery
@@ -287,7 +278,7 @@ RecipeList.propTypes = {
   ).isRequired,
 };
 
-export default withStyles(styles)(RecipeListWrapper);
+export default RecipeListWrapper;
 ```
 
 In this code we:

@@ -105,21 +105,21 @@ Recipe template, *src/templates/recipe.js*:
 import React from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Layout from '../components/layout';
 import Recipe from '../components/Recipe/Recipe';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
   },
-});
+}));
 
 const recipeTemplate = (props) => {
-  const { classes } = props;
+  const classes = useStyles();
   const { nodeRecipe: recipe } = props.data;
 
   return (
@@ -143,7 +143,7 @@ const recipeTemplate = (props) => {
   )
 };
 
-export default withStyles(styles)(recipeTemplate);
+export default recipeTemplate;
 
 // The $drupal_id variable here is obtained from the "context" object passed into
 // the createPage() API in gatsby-node.js.
@@ -182,7 +182,7 @@ export const query = graphql`
 The code in this file does two important things:
 
 1. It exports a React component, `recipeTemplate`, that provides a wrapper for the page content using a layout component, and then delegates to the `Recipe` component to render the content of the individual recipe.
-2. Exports a variable named `query` wrapped with the `graphql` tag function which contains a GraphQL query that at build time is run to gather data for the individual recipe being displayed. Note the `$drupal_id` variable in `RecipeTemplate($drupal_id: String!)`. That comes from the `{context: drupal_id: 'xxx'}` that was passed to the `createPage` action in our implementation of the `createPages` API. This is how we know which recipe we're currently generating HTML for. When the GraphQL query completes the data it returns is injected into the `recipeTemplate` component as `props.data.*`.
+1. Exports a variable named `query` wrapped with the `graphql` tag function which contains a GraphQL query that at build time is run to gather data for the individual recipe being displayed. Note the `$drupal_id` variable in `RecipeTemplate($drupal_id: String!)`. That comes from the `{context: drupal_id: 'xxx'}` that was passed to the `createPage` action in our implementation of the `createPages` API. This is how we know which recipe we're currently generating HTML for. When the GraphQL query completes the data it returns is injected into the `recipeTemplate` component as `props.data.*`.
 
 Here's the complete Recipe component, *src/components/Recipe/Recipe.js*:
 
@@ -194,11 +194,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = theme => ({
-	// custom CSS here ...
-});
 
 const Recipe = (props) => (
   <>
@@ -251,12 +246,12 @@ Recipe.propTypes = {
   tags: PropTypes.array,
 };
 
-export default withStyles(styles)(Recipe);
+export default Recipe;
 ```
 
 ## Generate some recipes
 
-With the above changes in place, restart the Gatsby development server with `gatsby develop`. When the application's static content is rebuilt, it should now include the recipe pages sourced from Drupal. Test it either by navigating directly to the path of a recipe or by navigating to a known 404 page. Gatsby has a useful trick where 404 pages on the development server will give you a list of all the pages Gatsby knows about internally.
+With the above changes in place, restart the Gatsby development server with `gatsby develop`. When the application's static content is rebuilt, it should now include the recipe pages sourced from Drupal. Test it either by navigating directly to the path of a recipe or by navigating to a known 404 page like http://localhost:8000/asdf. Gatsby has a useful trick where 404 pages on the development server will give you a list of all the pages Gatsby knows about internally.
 
 In the next tutorial we'll look at how to dynamically generate a list of recipes for the front page, and how to link to these full recipe pages.
 
