@@ -27,9 +27,11 @@ If you've already got an existing Drupal site and want to update it so that it c
 In order to use Drupal as a backend data source for Gatsby you need:
 
 1. Drupal 8 installed
-1. JSON:API configured to accept only JSON:API read operations so that anonymous traffic can access the JSON API provided REST endpoints. (This is the default setting.)
-1. Drupal configured to support CORS
-1. Optionally, the contributed JSON:API Extras and Simple OAuth modules enabled depending on your use case
+
+Optionally, depending on your use case, you might also need to:
+
+- Configure Drupal to support CORS
+- Install the JSON API Extras and Simple OAuth modules
 
 ## Install Drupal
 

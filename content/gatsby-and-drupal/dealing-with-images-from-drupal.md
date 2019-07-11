@@ -63,21 +63,21 @@ In *src/templates/recipe.js* modify the code to look like this:
 import React from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Layout from '../components/layout';
 import Recipe from '../components/Recipe/Recipe';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
   },
-});
+}));
 
 const recipeTemplate = (props) => {
-  const { classes } = props;
+  const classes = useStyles();
   const { nodeRecipe: recipe } = props.data;
 
   return (
@@ -90,12 +90,7 @@ const recipeTemplate = (props) => {
       />
       <Paper className={classes.root}>
         <Recipe
-          drupal_id={recipe.drupal_id}
-          title={recipe.title}
-          difficulty={recipe.difficulty}
-          cooking_time={recipe.cooking_time}
-          preparation_time={recipe.preparation_time}
-          ingredients={recipe.ingredients}
+          {...recipe}
           category={recipe.relationships.category[0].name}
           tags={recipe.relationships.tags}
           instructions={recipe.instructions.processed}
@@ -107,7 +102,7 @@ const recipeTemplate = (props) => {
   )
 };
 
-export default withStyles(styles)(recipeTemplate);
+export default recipeTemplate;
 
 // The $drupal_id variable here is obtained from the "context" object passed into
 // the createPage() API in gatsby-node.js.

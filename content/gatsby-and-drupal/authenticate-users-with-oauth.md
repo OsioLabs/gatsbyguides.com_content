@@ -73,8 +73,7 @@ const drupalOauthClient = new drupalOauth({
 
 // ... component definition goes here ...
 
-const LayoutWithStyles = withRoot(withStyles(styles)(Layout));
-export default withDrupalOauthProvider(drupalOauthClient, LayoutWithStyles);
+export default withDrupalOauthProvider(drupalOauthClient, Layout);
 ```
 
 There's a bit of extra code here handling integration with the Material UI library, but the important parts of what's going on here are:
@@ -252,16 +251,14 @@ import LogoutLink from '../LogoutLink/LogoutLink';
 Then update the export statement to wrap the existing `Navigation` component with `withDrupalOauthConsumer` which will give us access to `props.userAuthenticated`.
 
 ```javascript
-export default withStyles(styles)(withDrupalOauthConsumer(Navigation));
+export default withDrupalOauthConsumer(Navigation);
 ```
 
 Finally, update the `Navigation` component so that it checks to see if the user is authenticated, and renders either a `SignIn`, or a `LogoutLink` depending on the state:
 
 ```javascript
 {props.userAuthenticated ?
-  <>
-    <LogoutLink/>
-  </>
+  <LogoutLink/>
   :
   <SignIn />
 }

@@ -161,15 +161,14 @@ Here's the complete code for the updated *src/components/Recipe/Recipe.js* file:
 import React from 'react';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
+import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import RecipeList from '../RecipeList/RecipeList';
-
 import withDrupalOauthConsumer from '../drupal-oauth/withDrupalOauthConsumer';
 
 const styles = theme => ({
@@ -257,7 +256,7 @@ class Recipe extends React.Component {
             <Typography variant="subtitle1">Ingredients:</Typography>
             <List dense={true}>
               {
-                this.state.ingredients.map(item => <ListItem key={item}>{item}</ListItem>)
+                this.state.ingredients.map((item, index) => <ListItem key={index}>{item}</ListItem>)
               }
             </List>
 
@@ -286,7 +285,6 @@ Recipe.propTypes = {
 };
 
 const RecipeWithStyles = withStyles(styles)(Recipe);
-
 export default withDrupalOauthConsumer(RecipeWithStyles);
 ```
 
