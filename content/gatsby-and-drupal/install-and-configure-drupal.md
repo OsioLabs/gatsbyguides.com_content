@@ -1,7 +1,7 @@
 # Install and Configure Drupal
 
 [# summary #]
-If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access. Then enable the core JSON API module, optionally install some contributed modules, and make a couple of configuration changes.
+If you want to integrate Gatsby and Drupal you'll have to get a Drupal site up-and-running in a location that Gatsby can access. Then enable the core JSON:API module, optionally install some contributed modules, and make a couple of configuration changes.
 
 In this tutorial we'll:
 
@@ -52,8 +52,8 @@ For a more in-depth look at what's required to get Drupal installed and running 
 
 In order to get Drupal and Gatsby to play well together we'll install the following modules:
 
-- [JSON API](https://www.drupal.org/docs/8/modules/jsonapi): This is the only one that's required for the integration to work and it is included with Drupal core. JSON API provides zero-configuration REST access to all the content in your Drupal site using the [{json:api}](https://jsonapi.org/) spec.
-- [JSON API Extras](https://www.drupal.org/project/jsonapi_extras): Allows us to tweak the configuration of the JSON API module. We'll use this to disable resource endpoints that we don't need exposed.
+- [JSON:API](https://www.drupal.org/docs/8/modules/jsonapi): This is the only one that's required for the integration to work and it is included with Drupal core. JSON:API provides REST access to all the content in your Drupal site using the [{json:api}](https://jsonapi.org/) spec. It can be configured to allow only read operations or all CRUD (Create, Read, Update, Delete) operations.
+- [JSON:API Extras](https://www.drupal.org/project/jsonapi_extras): Allows us to tweak the configuration of the JSON:API module. We'll use this to disable resource endpoints that we don't need exposed.
 - [Simple OAuth](https://www.drupal.org/project/simple_oauth): We'll use this, and the included Simple OAuth Extras module, to turn Drupal into an OAuth 2 provider. Our Gatsby application can then use Drupal for user account storage, authentication, and authorization.
 
 The quickest way to download these all is using Composer. From the root of your Drupal project execute the following command:
@@ -62,7 +62,7 @@ The quickest way to download these all is using Composer. From the root of your 
 composer require drupal/jsonapi_extras drupal/simple_oauth
 ```
 
-Then in your Drupal site in the Manage administration menu navigate to *Extend*. Click the box to enable *JSON API*, *JSON API Extras*, *Simple OAuth*, and *Simple OAuth Extras*. Scroll to the bottom of the page and click *Install*. Once completed you should see a confirmation message indicating that the modules were successfully installed.
+Then in your Drupal site in the Manage administration menu navigate to *Extend*. Click the box to enable *JSON:API*, *JSON:API Extras*, *Simple OAuth*, and *Simple OAuth Extras*. Scroll to the bottom of the page and click *Install*. Once completed you should see a confirmation message indicating that the modules were successfully installed.
 
 You can confirm that JSON API is working by navigating to the URL */jsonapi* on your Drupal site. You should see a list of JSON API endpoints.
 
