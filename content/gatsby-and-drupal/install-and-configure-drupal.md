@@ -20,6 +20,8 @@ Install the latest version of Drupal on your development environment and configu
 
 For the purposes of this tutorial we'll install Drupal on our [localhost](http://localhost) alongside Gatsby so we can easily do development for both at the same time. Alternatively, you can install Drupal using a hosting provider like [Pantheon](https://pantheon.io/) that allows you to have a development demo site.
 
+Don't want to install Drupal? Or, using another CMS entirely? Go ahead and skip to [Use Our Drupal Instance, or Another CMS](/content/gatsby-and-drupal/used-hosted-drupal.md).
+
 If you've already got an existing Drupal site and want to update it so that it can be integrated with Gatsby, this tutorial will cover everything you need to do so. Skip the parts about getting Drupal installed and start with installing the JSON API module.
 
 ## Requirements for using Drupal as a backend for Gatsby

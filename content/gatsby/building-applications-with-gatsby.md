@@ -55,6 +55,12 @@ In our experience this is super powerful for an application where a large portio
 
 [Learn more about building client-only routes.](/content/gatsby-and-drupal/create-client-only-routes.md)
 
+## Separation of concerns
+
+When planning and writing code that deals with authenticated users we recommend you try and keep the code that handles the authentication and authorization process separate from the components that handle the display logic. Ideally, in your components, you want to be able to check a state variable like `isAuthenticated` for a `true` or `false` value, and vary what's rendered based on that. While keeping the code that determines the value for that state variable separate. This would allow you to swap out the service providing authentication for you application without having to rewrite the display logic.
+
+We've tried to do that in these tutorials. Keeping the majority of the code that deals with connecting to Drupal's API independent from the components that render what a user sees on the page.
+
 ## Recap
 
 Gatsby applications are more than just static assets. Using React's hydration technique after a user's browser loads the initial static assets, client-side JavaScript does the work of bootstrapping a full progressive web application environment in React. Once that's completed, you can use React to create dynamic elements within the page. Hybrid pages and client-only routes are two common ways of approaching dynamic content in a Gatsby application.
