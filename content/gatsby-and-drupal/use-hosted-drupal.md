@@ -3,7 +3,7 @@
 [# summary #]
 Throughout these tutorials we use Drupal as the backend Content Management System (CMS) for our project. You can however choose to use another CMS instead, and for the most part be able to follow along with these tutorials. Gatsby mostly doesn't care where your data comes from. Once it's been consumed by Gatsby it's all the same. And that's one of the beautiful things about it.
 
-Additionally, to make it easier to learn Gatsby without having to worry much about the CMS backend for now we've setup a Drupal instance you can connect Gatsby to.
+Additionally, to make it easier to learn Gatsby without having to worry much about the CMS backend right now, we've setup a Drupal instance you can connect Gatsby to.
 
 In this tutorial we'll
 
