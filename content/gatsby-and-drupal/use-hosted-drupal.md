@@ -74,7 +74,11 @@ Use this if:
 
 ## Recap
 
-In this tutorial we looked at three different possible ways to get started configuring a backend CMS to use while following along with these tutorials. This includes; Use our existing Drupal backend, setup your own Drupal instance, and choose and setup a different CMS entirely.
+In this tutorial we looked at three different possible ways to get started configuring a backend CMS to use while following along with these tutorials. This includes the following 3 options:
+
+- Use our existing Drupal backend;
+- Set up your own Drupal instance;
+- Or choose and setup a different CMS entirely.
 
 ## Further your understanding
 
