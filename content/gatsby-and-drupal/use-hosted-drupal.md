@@ -31,7 +31,7 @@ Want to follow along with these tutorials, and use Drupal as the backend, but do
 
 Use this if:
 
-- You're not concerned about the CMS at this point but do want to learn about developing applications with Gatsby that source data from a CMS
+- You're not concerned about the CMS at this point but do want to learn about developing applications with Gatsby that source data from a CMS.
 - Or, you're pretty sure you want to use Drupal as your CMS, but for now you're only interested in the Gatsby side of things.
 
 Here's the details you'll need to use our example site. Plug them in as necessary while working through code examples:
