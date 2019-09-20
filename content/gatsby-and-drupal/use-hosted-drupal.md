@@ -5,7 +5,7 @@ Throughout these tutorials we use Drupal as the backend Content Management Syste
 
 Additionally, to make it easier to learn Gatsby without having to worry much about the CMS backend right now, we've setup a Drupal instance you can connect Gatsby to.
 
-In this tutorial we'll
+In this tutorial we'll:
 
 - Explain how you can use our existing Drupal backend while learning Gatsby instead of setting up your own
 - Learn about how you can easily swap out Drupal with your CMS of choice and still benefit from the content of these tutorials
