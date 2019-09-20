@@ -70,7 +70,7 @@ Use this if:
 
 **GraphQL fields and objects will likely have different names:** The names of objects and fields available to you when querying GraphQL are going to be dependent on the source plugin you use. When using the `gatsby-source-drupal` plugin this matches the content types configured in the specific Drupal applications data model. You'll need to adjust those queries to match your data. Luckily the GraphiQL tool which Gatsby includes at `http://localhost:8000/__graphql` when you run `gatsby develop` makes is possible to quickly explore the GraphQL data model.
 
-**Authorization code examples:** The code that handles user authentication will vary depending on where your user accounts live. We've used an OAuth password grant flow in this example, so in theory anything that supports OAuth authentication will work. However in practice this is likely to require a bit of tweaking if you do reuse the code we wrote to interface with something other than Drupal. That said, we've also written these tutorials with the idea that you should be able to swap in your own authentication and authorization library with minimal changes.
+**Authorization code examples:** The code that handles user authentication will vary depending on where your user accounts live. We've used an OAuth password grant flow in this example. In theory, anything that supports OAuth authentication will work. However, in practice this is likely to require a bit of tweaking if you do reuse the code we wrote to interface with something other than Drupal. That said, we've also written these tutorials with the idea that you should be able to swap in your own authentication and authorization library with minimal changes.
 
 ## Recap
 
