@@ -66,7 +66,7 @@ Use this if:
 
 - You're already using another CMS for your data and don't plan to use Drupal.
 
-### Gotcha's
+### Gotchas
 
 **GraphQL fields and objects will likely have different names:** The names of objects and fields available to you when querying GraphQL are going to be dependent on the source plugin you use. When using the `gatsby-source-drupal` plugin this matches the content types configured in the specific Drupal applications data model. You'll need to adjust those queries to match your data. Luckily the GraphiQL tool which Gatsby includes at http://localhost:8000/__graphql when you run `gatsby develop` makes is possible to quickly explore the GraphQL data model.
 
