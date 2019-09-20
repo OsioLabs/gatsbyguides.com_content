@@ -64,7 +64,7 @@ You can also choose to use a different CMS entirely. In fact, anything with an [
 
 Use this if:
 
-- You're already using another CMS for your data and don't plan to use Drupal
+- You're already using another CMS for your data and don't plan to use Drupal.
 
 ### Gotcha's
 
