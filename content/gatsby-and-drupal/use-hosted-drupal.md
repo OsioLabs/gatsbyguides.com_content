@@ -8,7 +8,7 @@ Additionally, to make it easier to learn Gatsby without having to worry much abo
 In this tutorial we'll:
 
 - Explain how you can use our existing Drupal backend while learning Gatsby instead of setting up your own
-- Learn about how you can easily swap out Drupal with your CMS of choice and still benefit from the content of these tutorials
+- Show you how you can easily swap out Drupal with your CMS of choice and still benefit from the content of these tutorials
 
 By the end of this tutorial you should be able to choose the path that works best for you while following the rest of the tutorials in this series.
 [# endsummary #]
