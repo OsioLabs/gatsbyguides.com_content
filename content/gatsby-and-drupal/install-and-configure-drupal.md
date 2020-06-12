@@ -64,23 +64,13 @@ The quickest way to download these all is using Composer. From the root of your 
 composer require drupal/jsonapi_extras drupal/simple_oauth
 ```
 
-Then in your Drupal site in the Manage administration menu navigate to *Extend*. Click the box to enable *JSON:API*, *JSON:API Extras*, *Simple OAuth*, and *Simple OAuth Extras*. Scroll to the bottom of the page and click *Install*. Once completed you should see a confirmation message indicating that the modules were successfully installed.
+Then in your Drupal site in the Manage administration menu navigate to _Extend_. Click the box to enable _JSON:API_, _JSON:API Extras_, _Simple OAuth_, and _Simple OAuth Extras_. Scroll to the bottom of the page and click _Install_. Once completed you should see a confirmation message indicating that the modules were successfully installed.
 
-You can confirm that JSON API is working by navigating to the URL */jsonapi* on your Drupal site. You should see a list of JSON API endpoints.
+You can confirm that JSON API is working by navigating to the URL _/jsonapi_ on your Drupal site. You should see a list of JSON API endpoints.
 
 ![Screenshot of Firefox showing output from accessing /jsonapi.](/content/gatsby-and-drupal/images/firefox-jsonapi-example.png)
 
 [Learn more about downloading and installing Drupal modules](https://drupalize.me/tutorial/user-guide/extend-module-install?p=3072).
-
-## Configure permissions
-
-Edit the permissions to give the Anonymous role the *Access JSON API resource list* permissions. Without this Gatsby will get an HTTP 406 when trying to access the root listing at */jsonapi*.
-
-In the Manage administration menu navigate to *People* > *Permissions*. Click the box for *Access JSON API resource list* under the Anonymous User header.
-
-![Screenshot of the Drupal permissions page with the checkbox for the JSON API access resource list checked for anon users.](/content/gatsby-and-drupal/images/permissions-jsonapi.png)
-
-Then scroll to the bottom of the page and click *Save permissions*.
 
 ## Configure Simple OAuth
 
@@ -110,7 +100,7 @@ chmod 600 public.key
 chmod 600 private.key
 ```
 
-Then tell the Simple OAuth module where to find them. In your Drupal site, in the Manage administrative menu navigate to *Configuration* > *Simple OAuth* and fill in the form with the paths to the keys you just generated.
+Then tell the Simple OAuth module where to find them. In your Drupal site, in the Manage administrative menu navigate to _Configuration_ > _Simple OAuth_ and fill in the form with the paths to the keys you just generated.
 
 ```shell
 Access token expiration time: 300
@@ -121,13 +111,13 @@ Private Key: ../keys/private.key
 
 ![Screenshot of simple oauth configuration form with settings listed above.](/content/gatsby-and-drupal/images/simpleoauth-settings.png)
 
-Next, setup a a new OAuth client. First add a new Drupal role. Navigate to *People* > *Roles* (admin/people/roles) and add a new role named "Gatsby Client".
+Next, setup a a new OAuth client. First add a new Drupal role. Navigate to _People_ > _Roles_ (admin/people/roles) and add a new role named "Gatsby Client".
 
-Then in the Manage administration menu navigate to *Configuration* > *Simple OAuth* > *Clients* and click the button *Add Consumer*. Fill in the form, and remember the value you enter for the *New Secret* field as you'll need that again later. Under *Scopes* choose the *Gatsby Client* role we just created. Finally, click *Save* to add the new consumer.
+Then in the Manage administration menu navigate to _Configuration_ > _Simple OAuth_ > _Clients_ and click the button _Add Consumer_. Fill in the form, and remember the value you enter for the _New Secret_ field as you'll need that again later. Under _Scopes_ choose the _Gatsby Client_ role we just created. Finally, click _Save_ to add the new consumer.
 
 On the resulting page you should see your new consumer list along with a UUID. Make note of this UUID. Combined with the secret from above these will be your consumer ID, and key, used for OAuth requests later.
 
-Finally, give authenticated users permission to *Grant OAuth 2 codes*. In the Manage administration menu navigate to *People* > *Permissions* (people/permissions). Check the box to give *Authenticated User* the *Grant OAuth 2 codes* permissions. Then scroll to the bottom of the page and click *Save permissions*.
+Finally, give authenticated users permission to _Grant OAuth 2 codes_. In the Manage administration menu navigate to _People_ > _Permissions_ (people/permissions). Check the box to give _Authenticated User_ the _Grant OAuth 2 codes_ permissions. Then scroll to the bottom of the page and click _Save permissions_.
 
 ![Screenshot showing simple oauth permissions checkbox checked.](/content/gatsby-and-drupal/images/permissions-simpleoauth.png)
 
@@ -135,7 +125,7 @@ Finally, give authenticated users permission to *Grant OAuth 2 codes*. In the Ma
 
 If you're only using Drupal as a data source for Gatsby during the build phase this isn't required. However, if you plan to write code in your application that dynamically queries Drupal from the user's browser you'll need to set up [Cross Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). We'll do this in our example application when we talk about hybrid pages and client only routes. So go ahead and configure it now.
 
-Drupal 8 core provides support for CORS since 8.2, but it's turned off by default. To turn it on you will need to edit your *sites/default/services.yml* file. If you do not have one, you can create it by copying *sites/default/default.services.yml* and renaming it *sites/default/services.yml*.
+Drupal 8 core provides support for CORS since 8.2, but it's turned off by default. To turn it on you will need to edit your _sites/default/services.yml_ file. If you do not have one, you can create it by copying _sites/default/default.services.yml_ and renaming it _sites/default/services.yml_.
 
 Update the `cors.config` section to match the following:
 
@@ -162,13 +152,13 @@ cors.config:
 
 This configuration is very generic, and it will allow any kind of resource sharing. It's suitable for learning purposes, but you should learn about hardening these settings for a production application. Make sure to update `allowedOrigins` and `allowedMethods` to reflect only the valid domains and HTTP methods that your browser-based applications use. Public APIs can leave these values as is, since they may not know about the consumers that integrate with the API.
 
-After *services.yml* is updated, you need to [clear caches](https://drupalize.me/tutorial/clear-drupals-cache) for the changes to be applied.
+After _services.yml_ is updated, you need to [clear caches](https://drupalize.me/tutorial/clear-drupals-cache) for the changes to be applied.
 
 ## Recap
 
-In this tutorial we downloaded and installed Drupal and the JSON API, JSON API Extras, and Simple OAuth contributed modules. Then we made changes to the default configuration necessary to allow Gatsby to access the data and users on our site. We adjusted permissions related to accessing JSON API data and OAuth tokens, generating public/private keys for OAuth encryption, and enabling CORS support.
+In this tutorial we downloaded and installed Drupal and the JSON API, JSON API Extras, and Simple OAuth contributed modules. Then we made changes to the default configuration necessary to allow Gatsby to access the data and users on our site. We adjusted permissions related to accessing OAuth tokens, generated public/private keys for OAuth encryption, and enabled CORS support.
 
-With all of these steps complete your Drupal site is ready to serve as both a data source for Gatsby's build process as well as the target for dynamic API queries in React. Consumers will be able to access all of your site's content via the */jsonapi* endpoint, as well as authenticate and authorize users via OAuth.
+With all of these steps complete your Drupal site is ready to serve as both a data source for Gatsby's build process as well as the target for dynamic API queries in React. Consumers will be able to access all of your site's content via the _/jsonapi_ endpoint, as well as authenticate and authorize users via OAuth.
 
 ## Further your understanding
 
