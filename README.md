@@ -1,4 +1,14 @@
+# Gatsby & Drupal tutorials by Osio Labs
+
+This repository contains the content of all the tutorials that used to live on https://gatsbyguides.com. It is intended to provide an introduction to using the [Gatsby Framework](https://www.gatsbyjs.com/) with a Decoupled [Drupal backend](https://drupal.org). The content was originally written by [@eojthebrave](https://twitter.com/eojthebrave) for [Osio Labs](https://osiolabs.com). However, it is no longer being actively updated.
+
+While the content is getting older it's still a solid introduction to using Drupal and Gatsby to build modern decoupled web applications. And covers things like user authentication with OAuth, and content personalization, that aren't covered in most introductory material.
+
+As such we've decided to make the content freely available with a CCbySA license. We're happy to accept pull-requests for updates, though are unlikely to make any of our own anytime soon. And feel free to adapt the content into your own projects in accordance with the CCbySA license.
+
 ## Tutorials in this collection
+
+The content is intended to be consumed in this order.
 
 1. [What is Gatsby?](/content/gatsby/what-is-gatsby.md)
 1. [Hello World](/content/gatsby/hello-world.md)
@@ -14,6 +24,5 @@
 1. [Authenticate Users with OAuth](/content/gatsby-and-drupal/authenticate-users-with-oauth.md)
 1. [Create Hybrid Pages](/content/gatsby-and-drupal/create-hybrid-pages.md)
 1. [Create Client Only Routes](/content/gatsby-and-drupal/create-client-only-routes.md)
-
 
 Example code for this series can be found in this repo - https://github.com/OsioLabs/gatsby-drupal-examples
