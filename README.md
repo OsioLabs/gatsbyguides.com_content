@@ -26,3 +26,14 @@ The content is intended to be consumed in this order.
 1. [Create Client Only Routes](/content/gatsby-and-drupal/create-client-only-routes.md)
 
 Example code for this series can be found in this repo - https://github.com/OsioLabs/gatsby-drupal-examples
+
+
+## Blog Posts
+
+These blog posts where written as part of the #100 days of Gatsby challenge. And cover integrating Drupal's Media Entities, and Webform features with Gatbsy. As well as some deployment related topics and creating Gatsby themes.
+
+1. [#100DaysOfGatsby Week 1: Start A Blog](/content/blog_posts/100days-week1-start-a-blog.md)
+1. [#100DaysOfGatsby Week 1: Create a Gatsby Theme](/content/blog_posts/100days-week1-create-a-theme.md)
+1. [#100DaysOfGatsby Week 2: Host Your Gatsby Site for Free](/content/blog_posts/100days-week2-host-your-site-for-free.md)
+1. [#100DaysOfGatsby Week 3: Drupal Media Entities](/content/blog_posts/100days-week3-drupal-media-entities.md)
+1. [#100DaysOfGatsby Week 4: Formik & RESTful Drupal Webforms](/content/blog_posts/100days-week4-restful-drupal-webforms.md)
